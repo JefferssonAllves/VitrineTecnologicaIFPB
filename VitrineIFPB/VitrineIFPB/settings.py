@@ -133,9 +133,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-
 #MEDIA CONFIG
-#...
+MEDIA_URL = '/media/'  # URL para acessar as imagens
+MEDIA_ROOT = BASE_DIR / 'media'  # Pasta física
 
 
 # Default primary key field type

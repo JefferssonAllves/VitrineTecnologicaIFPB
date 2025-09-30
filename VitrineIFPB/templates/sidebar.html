@@ -9,14 +9,9 @@
   <div class="box">
     <h3>Categorias</h3>
     <ul>
-      <li><a href="#">Alimentos</a></li>
-      <li><a href="#">Biologia</a></li>
-      <li><a href="#">Biotecnologia</a></li>
-      <li><a href="#">Energia</a></li>
-      <li><a href="#">Engenharias</a></li>
-      <li><a href="#">Nanotecnologia</a></li>
-      <li><a href="#">Matemática</a></li>
-      <li><a href="#">Física</a></li>
+      {% for categoria in categorias %}
+        <li><a href="#">{{ categoria.nome }}</a></li>
+      {% endfor %}
     </ul>
   </div>
 </aside>

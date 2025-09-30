@@ -1,8 +1,14 @@
 from django.shortcuts import render
+from .models import Projeto, Categoria
 
-# Create your views here.
+
+
 def home(request):
-  return render(request, 'home/home.html')
+  if request.method == 'GET':
+    projetos = Projeto.objects.all()
+    categorias = Categoria.objects.all()
+
+  return render(request, 'home/home.html', {'projetos': projetos, 'categorias': categorias})
 
 def patentes(request):
   return render(request, 'patentes/patentes.html')

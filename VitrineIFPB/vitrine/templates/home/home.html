@@ -8,21 +8,22 @@
 
 
 {% block content %}
-  <!-- Container principal -->
   <div class="container">
     {% include 'sidebar.html' %}
     <!-- Conteúdo principal -->
     <main class="content">
       <h2>Destaques</h2>
       <div class="grid-projects">
-        <!-- Card exemplo -->
-        <div class="card">
-          <img src="#" alt="Projeto 1">
-          <div class="info">
-            <h3>Projeto Exemplo 1</h3>
-            <p>Breve descrição do projeto para vitrine.</p>
+        {% for projeto in projetos %}
+          <!-- Card exemplo -->
+          <div class="card">
+            <img src="{{ projeto.img.url }}" alt="Projeto 1">
+            <div class="info">
+              <h3>{{ projeto.nome }}</h3>
+              <p>{{projeto.descricao }}</p>
+            </div>
           </div>
-        </div>
+        {% endfor %}
       </div>
     </main>
   </div>
