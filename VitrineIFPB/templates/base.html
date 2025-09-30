@@ -30,7 +30,7 @@
         <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="{% url 'patentes' %}">Patentes</a></li>
         <li><a href="{% url 'softwares' %}">Softwares</a></li>
-        <li><a href="institucional.html">Institucional</a></li>
+        <li><a href="{% url 'institucional' %}">Institucional</a></li>
       </ul>
     </nav>
   </header>
@@ -65,5 +65,7 @@
       <p>© 2025 Vitrine Tecnológica - IFPB.</p>
     </div>
   </footer>
+  {% block script %}
+  {% endblock %}
 </body>
 </html>

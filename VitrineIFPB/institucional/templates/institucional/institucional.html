@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'institucional/css/institucional.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Container principal -->
+<main class="institucional-container">
+  <h1 class="page-title">Institucional</h1>
+
+  <div class="tabs">
+    <button class="tab-link active" onclick="openTab(event, 'vitrine')">A Vitrine Tecnológica</button>
+    <button class="tab-link" onclick="openTab(event, 'diretoria')">Diretoria de Inovação</button>
+    <button class="tab-link" onclick="openTab(event, 'formularios')">Formulários para a Vitrine</button>
+  </div>
+
+  <div id="vitrine" class="tab-content active">
+    <p>
+      O objetivo da Vitrine é divulgar à sociedade e ao mercado os projetos de tecnologia e inovação
+      desenvolvidos
+      no Instituto Federal da Paraíba (IFPB), evidenciando o potencial da ciência e da pesquisa para o
+      desenvolvimento social, bem como a transparência das informações.
+    </p>
+  </div>
+
+  <div id="diretoria" class="tab-content">
+    <p>
+      A Diretoria de Inovação tem como missão apoiar e incentivar o desenvolvimento científico e tecnológico
+      no
+      âmbito do IFPB. É responsável por gerir processos relacionados à propriedade intelectual, transferência
+      de
+      tecnologia, incubação de empresas e parcerias com o setor produtivo.
+    </p>
+  </div>
+
+  <div id="formularios" class="tab-content">
+    <p>
+      Para submeter patentes e softwares à Vitrine Tecnológica, entre em contato com a Diretoria de Inovação
+      e preencha os formulários disponíveis no portal institucional do IFPB. Esses formulários permitem
+      organizar
+      as informações e garantir que o processo de avaliação seja feito de forma ágil e transparente.
+    </p>
+  </div>
+</main>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'institucional/js/institucional.js' %}"></script>
+{% endblock %}
