@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'patentes/css/patentes.css' %}">
+  <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    {% include 'sidebar.html' %}
+    <main class="content">
+      <h2 class="page-title">Todas as Patentes</h2>
+      <div class="patent-list">
+        <a href="#" class="patent-item">
+          <img src="#" alt="Imagem da patente">
+          <div class="patent-info">
+            <span class="tags">Destaque · Energia · Nanotecnologia · Patente Concedida</span>
+            <h3 class="patent-title">Pontos quânticos de CDSE marcadores de diesel</h3>
+          </div>
+        </a>
+      </div>
+    </main>
+  </div>
+{% endblock %}

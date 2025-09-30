@@ -1,0 +1,25 @@
+#AMBIENTE VIRTUAL
+venv/
+
+#VARIAVEIS DE AMBIENTE
+.env
+
+#BACNDO DE DADOS
+*.sqlite3
+
+#MIGRATIONS
+*/migrations/
+
+#ARQUIVOS PYTHON
+*.pyc
+__pycache__/
+
+#DJANGO
+media/
+staticfiles/
+logs/
+
+
+#VSCode
+.vscode/
+*.code-workspace

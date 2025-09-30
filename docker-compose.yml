@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - vitrine-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
+      interval: 10s   #   Verifica a cada 10 segundos
+      timeout: 5s     #   Espera 5 segundos por resposta
+      retries: 5      #   Tenta 5 vezes antes de declarar "falha"
+
+  web:
+    build: .
+    container_name: vitrineifpb_web
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=mysql://django_user:${DB_PASSWORD}@mysql:3306/vitrineifpb
+      - DB_HOST=mysql
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - vitrine-network
+
+volumes:
+  mysql_data:
+
+networks:
+  vitrine-network:
+    driver: bridge

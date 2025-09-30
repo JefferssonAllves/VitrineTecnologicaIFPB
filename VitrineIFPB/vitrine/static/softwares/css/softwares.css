@@ -1,0 +1,55 @@
+/* SOFTWARES */
+
+.softwares-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.page-title {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #b8860b;
+}
+
+.software-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  padding: 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+.software-item:hover {
+  background: #f9f9f9;
+  transform: translateX(5px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.software-item img {
+  width: 160px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 6px;
+}
+
+.software-info h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #054911;
+  transition: color 0.3s;
+}
+
+.software-item:hover .software-info h2 {
+  color: #168229;
+}
+
+.software-info p {
+  color: #555;
+  font-size: 15px;
+  line-height: 1.5;
+}

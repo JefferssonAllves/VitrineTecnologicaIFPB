@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+  <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+{% endblock %}
+
+
+{% block content %}
+  <!-- Container principal -->
+  <div class="container">
+    {% include 'sidebar.html' %}
+    <!-- Conteúdo principal -->
+    <main class="content">
+      <h2>Destaques</h2>
+      <div class="grid-projects">
+        <!-- Card exemplo -->
+        <div class="card">
+          <img src="#" alt="Projeto 1">
+          <div class="info">
+            <h3>Projeto Exemplo 1</h3>
+            <p>Breve descrição do projeto para vitrine.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="see-more">
+    <a href="{% url 'patentes' %}" class="btn-see-more">Todas as Patentes</a>
+  </div>
+{% endblock %}
