@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'administrador/css/admin.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Container principal -->
+<main class="admin-main">
+  <div class="admin-tab-menu">
+    <button class="admin-tab-button active" onclick="openTab(event, 'projetos')">Projetos</button>
+    <button class="admin-tab-button" onclick="openTab(event, 'categorias')">Categorias</button>
+  </div>
+
+  <div id="projetos" class="admin-tab-content active">
+    <div class="admin-form-section">
+      <h2 class="admin-h2">Cadastrar Novo Projeto</h2>
+      <form>
+        <div class="admin-form-group">
+          <label for="imagem-projeto">Imagem do Projeto</label>
+          <input type="file" id="imagem-projeto" name="imagem" accept="image/*">
+        </div>
+        <div class="admin-form-group">
+          <label for="projeto-titulo">Título</label>
+          <input type="text" id="projeto-titulo" placeholder="Digite o título do projeto" class="admin-input">
+        </div>
+        <div class="admin-form-group">
+          <label for="projeto-desc">Descrição</label>
+          <textarea id="projeto-desc" rows="3" placeholder="Descrição do projeto" class="admin-input"></textarea>
+        </div>
+        <div class="admin-form-group">
+          <label for="projeto-autores">Autores</label>
+          <input type="text" id="projeto-autores" placeholder="Nome dos autores" class="admin-input">
+        </div>
+        <div class="admin-form-group">
+          <label for="projeto-categoria">Categoria</label>
+          <select id="projeto-categoria" name="projeto-categoria" class="admin-input">
+            <option value="">Selecione a Categoria</option>
+            <option value="patente">Patente</option>
+            <option value="software">Software</option>
+          </select>
+        </div>
+        <div class="admin-form-group">
+          <label for="projeto-areas">Área do Conhecimento</label>
+          <select id="projeto-areas" name="projeto-areas[]" class="admin-input" multiple>
+            <option value="saude">Saúde</option>
+            <option value="engenharia">Engenharia</option>
+            <option value="robotica">Robótica</option>
+          </select>
+        </div>
+        <button type="submit" class="admin-button">Cadastrar Projeto</button>
+      </form>
+    </div>
+
+    <div class="admin-table-section">
+      <h2 class="admin-h2">Projetos Cadastrados</h2>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Categoria</th>
+            <th>Área</th>
+            <th>Autores</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Título">Patente de Robótica</td>
+            <td data-label="Categoria">Patente</td>
+            <td data-label="Área">Robótica</td>
+            <td data-label="Autores">João da Silva</td>
+            <td data-label="Ações" class="admin-actions">
+              <button class="admin-actions-button"
+                onclick="openEditModal('projeto', 1, 'Patente de Robótica', 'Descrição da patente', 'João da Silva', 'patente', 'robotica')">Editar</button>
+              <button class="admin-actions-button"
+                onclick="openDeleteModal('projeto', 1, 'Patente de Robótica')">Excluir</button>
+            </td>
+          </tr>
+          <tr>
+            <td data-label="Título">App de Saúde</td>
+            <td data-label="Categoria">Software</td>
+            <td data-label="Área">Saúde</td>
+            <td data-label="Autores">Maria Santos</td>
+            <td data-label="Ações" class="admin-actions">
+              <button class="admin-actions-button"
+                onclick="openEditModal('projeto', 2, 'App de Saúde', 'Descrição do software', 'Maria Santos', 'software', 'saude')">Editar</button>
+              <button class="admin-actions-button"
+                onclick="openDeleteModal('projeto', 2, 'App de Saúde')">Excluir</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="categorias" class="admin-tab-content">
+    <div class="admin-form-section">
+      <h2 class="admin-h2">Cadastrar Categoria</h2>
+      <form>
+        <div class="admin-form-group">
+          <label for="categoria-nome">Nome da Categoria</label>
+          <input type="text" id="categoria-nome" placeholder="Digite o nome da categoria" class="admin-input">
+        </div>
+        <button type="submit" class="admin-button">Cadastrar Categoria</button>
+      </form>
+    </div>
+    <div class="admin-table-section">
+      <h2 class="admin-h2">Categorias Cadastradas</h2>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Categoria</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Categoria">Inovação</td>
+            <td data-label="Ações" class="admin-actions">
+              <button class="admin-actions-button" onclick="openEditModal('categoria', 1, 'Inovação')">Editar</button>
+              <button class="admin-actions-button"
+                onclick="openDeleteModal('categoria', 1, 'Inovação')">Excluir</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+<!-- Modais de Edição e Exclusão -->
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <h2 id="editModalTitle"></h2>
+    <form id="editForm">
+      <div class="admin-form-group">
+        <label for="editTitle">Título</label>
+        <input type="text" id="editTitle" class="admin-input" required>
+      </div>
+      <div class="admin-form-group">
+        <label for="editDesc">Descrição</label>
+        <textarea id="editDesc" rows="3" class="admin-input"></textarea>
+      </div>
+      <div class="admin-form-group">
+        <label for="editAutores">Autores</label>
+        <input type="text" id="editAutores" class="admin-input">
+      </div>
+      <div class="admin-form-group">
+        <label for="editCategory">Categoria</label>
+        <select id="editCategory" class="admin-input">
+          <option value="patente">Patente</option>
+          <option value="software">Software</option>
+        </select>
+      </div>
+      <div class="admin-form-group">
+        <label for="editArea">Área do Conhecimento</label>
+        <select id="editArea" class="admin-input" multiple>
+          <option value="saude">Saúde</option>
+          <option value="engenharia">Engenharia</option>
+          <option value="robotica">Robótica</option>
+        </select>
+      </div>
+      <input type="hidden" id="editId">
+      <input type="hidden" id="editType">
+
+      <button type="submit" class="admin-button">Salvar Alterações</button>
+    </form>
+  </div>
+</div>
+
+<div id="deleteModal" class="modal">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <h2 id="deleteModalTitle">Confirmar Exclusão</h2>
+    <p id="deleteMessage">Tem certeza que deseja excluir este item? Esta ação não pode ser desfeita.</p>
+    <div class="modal-actions">
+      <button id="confirmDelete" class="admin-button delete-button">Excluir</button>
+      <button id="cancelDelete" class="admin-button">Cancelar</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'administrador/js/admin.js' %}"></script>
+<script src="{% static 'js/openTab.js' %}"></script>
+
+{% endblock %}

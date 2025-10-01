@@ -14,38 +14,82 @@
     <button class="tab-link active" onclick="openTab(event, 'vitrine')">A Vitrine Tecnológica</button>
     <button class="tab-link" onclick="openTab(event, 'diretoria')">Diretoria de Inovação</button>
     <button class="tab-link" onclick="openTab(event, 'formularios')">Formulários para a Vitrine</button>
+    <button class="tab-link" onclick="openTab(event, 'administrador')">Administrador</button>
   </div>
 
   <div id="vitrine" class="tab-content active">
     <p>
       O objetivo da Vitrine é divulgar à sociedade e ao mercado os projetos de tecnologia e inovação
-      desenvolvidos
-      no Instituto Federal da Paraíba (IFPB), evidenciando o potencial da ciência e da pesquisa para o
+      desenvolvidos no Instituto Federal da Paraíba (IFPB), evidenciando o potencial da ciência e da pesquisa
+      para o
       desenvolvimento social, bem como a transparência das informações.
     </p>
   </div>
-
   <div id="diretoria" class="tab-content">
     <p>
       A Diretoria de Inovação tem como missão apoiar e incentivar o desenvolvimento científico e tecnológico
-      no
-      âmbito do IFPB. É responsável por gerir processos relacionados à propriedade intelectual, transferência
-      de
-      tecnologia, incubação de empresas e parcerias com o setor produtivo.
+      no âmbito do IFPB. É responsável por gerir processos relacionados à propriedade intelectual,
+      transferência
+      de tecnologia, incubação de empresas e parcerias com o setor produtivo.
     </p>
   </div>
-
   <div id="formularios" class="tab-content">
-    <p>
-      Para submeter patentes e softwares à Vitrine Tecnológica, entre em contato com a Diretoria de Inovação
-      e preencha os formulários disponíveis no portal institucional do IFPB. Esses formulários permitem
-      organizar
-      as informações e garantir que o processo de avaliação seja feito de forma ágil e transparente.
-    </p>
+    <form class="vitrine-form">
+      <div class="form-group">
+        <label for="imagem">Imagem do Projeto</label>
+        <input type="file" id="imagem" name="imagem" accept="image/*" required>
+      </div>
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" name="titulo" placeholder="Digite o título do projeto" required>
+      </div>
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" name="descricao" rows="4" placeholder="Descreva o projeto" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="autores">Autores</label>
+        <input type="text" id="autores" name="autores" placeholder="Digite os nomes dos autores" required>
+      </div>
+      <div class="form-group">
+        <label for="autores">Categoria</label>
+        <select id="categorias" name="categorias[]" required>
+          <option value="patente">Patente</option>
+          <option value="software">Software</option>
+
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="categorias">Áreas do Conhecimento</label>
+        <select id="areas-conhecimento" name="areas-conhecimento[]" multiple required>
+          <option value="patente">Saúde</option>
+          <option value="software">Engenharia</option>
+          <option value="inovacao">Robótica</option>
+
+        </select>
+        <small class="hint">Segure CTRL (Windows) ou Command (Mac) para selecionar mais de uma
+          categoria</small>
+      </div>
+      <button type="submit" class="submit-btn">Enviar</button>
+    </form>
+  </div>
+  <div id="administrador" class="tab-content">
+    <form class="login-form">
+      <h2>Login do Administrador</h2>
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+      </div>
+      <div class="form-group">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+      </div>
+      <button type="submit" class="login-btn">Entrar</button>
+    </form>
   </div>
 </main>
 {% endblock %}
 
 {% block script %}
-<script src="{% static 'institucional/js/institucional.js' %}"></script>
+<script src="{% static 'js/openTab.js' %}"></script>
 {% endblock %}

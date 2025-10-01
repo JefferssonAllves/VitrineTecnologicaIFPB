@@ -10,15 +10,17 @@
   <div class="container">
     {% include 'sidebar.html' %}
     <main class="content">
-      <h2 class="page-title">Todas as Patentes</h2>
+      <h2>Todas as Patentes</h2>
       <div class="patent-list">
-        <a href="#" class="patent-item">
-          <img src="#" alt="Imagem da patente">
-          <div class="patent-info">
-            <span class="tags">Destaque · Energia · Nanotecnologia · Patente Concedida</span>
-            <h3 class="patent-title">Pontos quânticos de CDSE marcadores de diesel</h3>
-          </div>
-        </a>
+        {% for projeto in projetos %}
+          <a href="#" class="patent-item">
+            <img src="{{ projeto.img.url }}" alt="Imagem da patente">
+            <div class="patent-info">
+              <span class="tags">Destaque · Energia · Nanotecnologia · Patente Concedida</span>
+              <h3 class="patent-title">{{ projeto.nome }}</h3>
+            </div>
+          </a>
+        {% endfor %}
       </div>
     </main>
   </div>

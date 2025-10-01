@@ -50,3 +50,131 @@
 .tab-content.active {
   display: block;
 }
+
+/* ===== FORMULÁRIO DA VITRINE ===== */
+.vitrine-form {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px;
+  background: #fdfdfd;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+}
+
+.vitrine-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.vitrine-form label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #054911;
+}
+
+.vitrine-form input[type="text"],
+.vitrine-form input[type="file"],
+.vitrine-form textarea,
+.vitrine-form select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: border 0.2s;
+}
+
+.vitrine-form input[type="text"]:focus,
+.vitrine-form textarea:focus,
+.vitrine-form select:focus {
+  border-color: #168229;
+  outline: none;
+}
+
+.vitrine-form textarea {
+  resize: vertical;
+}
+
+.vitrine-form select[multiple] {
+  height: 120px;
+}
+
+.vitrine-form .hint {
+  font-size: 13px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.submit-btn {
+  background: #168229;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover {
+  background: #0d591b;
+}
+
+.login-form {
+  max-width: 400px;
+  margin: 0 auto;
+  background: #fdfdfd;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.login-form h2 {
+  margin-bottom: 20px;
+  color: #054911;
+}
+
+.login-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.login-form label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.login-form input {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: border 0.2s;
+}
+
+.login-form input:focus {
+  border-color: #168229;
+  outline: none;
+}
+
+.login-btn {
+  background: #168229;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s;
+}
+
+.login-btn:hover {
+  background: #0d591b;
+}

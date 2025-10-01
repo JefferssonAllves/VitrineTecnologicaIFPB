@@ -8,7 +8,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('vitrine/', include('vitrine.urls'), name='vitrine'),
-    path('institucional/', include('institucional.urls'), name='institucional'),
+    path('vitrine/', include('institucional.urls'), name='institucional'),
+    path('administrador/', include('administrador.urls'), name='administrador'),
+
 ]
 
 if settings.DEBUG:

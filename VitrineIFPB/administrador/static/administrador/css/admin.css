@@ -1,0 +1,175 @@
+/* ADMINISTRADOR */
+
+.admin-main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* ===== MENU DE ABAS ===== */
+.admin-tab-menu {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.admin-tab-button {
+    flex: 1;
+    padding: 12px;
+    background: #ddd;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 6px 6px 0 0;
+    transition: 0.3s;
+}
+
+.admin-tab-button.active {
+    background: #0d591b;
+    color: white;
+}
+
+/* ===== CONTEÚDO DAS ABAS ===== */
+.admin-tab-content {
+    display: none;
+    background: #fff;
+    padding: 20px;
+    border-radius: 0 6px 6px 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-tab-content.active {
+    display: block;
+}
+
+/* ===== ESTILOS PARA AS NOVAS SEÇÕES ===== */
+.admin-form-section {
+    margin-bottom: 40px; /* Adiciona espaço entre as seções */
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee; /* Linha sutil para separar as seções */
+}
+
+.admin-table-section {
+    margin-top: 20px; /* Espaço acima da seção da tabela */
+}
+/* ======================================== */
+
+.admin-h2 {
+    margin-top: 0; /* Garante que o h2 não tenha margem superior indesejada */
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.admin-form-group {
+    margin-bottom: 15px;
+}
+
+.admin-input,
+.admin-textarea,
+.admin-select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.admin-button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: #0d591b;
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.admin-button:hover {
+    background: #168229;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.admin-table th,
+.admin-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.admin-table th {
+    background: #f1f1f1;
+}
+
+.admin-actions button {
+    width: auto;
+    margin-right: 5px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+}
+
+/* ===== MODAIS ===== */
+.modal {
+    display: none; /* Oculta o modal por padrão */
+    position: fixed; /* Fixa o modal na tela, sobrepondo outros elementos */
+    z-index: 1000; /* Garante que ele fique no topo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6); /* Fundo semi-transparente */
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* Centraliza verticalmente */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    animation: fadeIn 0.5s;
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.delete-button {
+    background-color: #dc3545; /* Cor vermelha para o botão de exclusão */
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}

@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     #MY APPS
     'vitrine',
     'institucional',
+    'administrador',
 ]
 
 MIDDLEWARE = [

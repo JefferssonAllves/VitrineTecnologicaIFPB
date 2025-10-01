@@ -1,22 +1,4 @@
 
-
-
-
-
-
-/* MAIN */
-
-.content {
-  margin-left: 0;
-}
-
-.content h2 {
-  font-size: 50px;
-  color: #b8860b;
-  margin-top: 35px;
-  margin-bottom: 35px;
-}
-
 .grid-projects {
   display: grid;
   grid-template-columns: repeat(auto-fill, 370px);
