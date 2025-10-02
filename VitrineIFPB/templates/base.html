@@ -31,6 +31,9 @@
         <li><a href="{% url 'patentes' %}">Patentes</a></li>
         <li><a href="{% url 'softwares' %}">Softwares</a></li>
         <li><a href="{% url 'institucional' %}">Institucional</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'logout' %}">Sair</a></li>
+        {% endif %}
       </ul>
     </nav>
   </header>

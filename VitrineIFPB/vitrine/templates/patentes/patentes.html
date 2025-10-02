@@ -14,10 +14,10 @@
       <div class="patent-list">
         {% for projeto in projetos %}
           <a href="#" class="patent-item">
-            <img src="{{ projeto.img.url }}" alt="Imagem da patente">
+            <img src="{{ projeto.imagem.url }}" alt="Imagem da patente">
             <div class="patent-info">
               <span class="tags">Destaque · Energia · Nanotecnologia · Patente Concedida</span>
-              <h3 class="patent-title">{{ projeto.nome }}</h3>
+              <h3 class="patent-title">{{ projeto.titulo }}</h3>
             </div>
           </a>
         {% endfor %}

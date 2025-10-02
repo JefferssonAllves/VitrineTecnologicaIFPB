@@ -17,10 +17,10 @@
         {% for projeto in projetos %}
           <!-- Card exemplo -->
           <div class="card">
-            <img src="{{ projeto.img.url }}" alt="Projeto 1">
+            <img src="{{ projeto.imagem.url }}" alt="Projeto 1">
             <div class="info">
-              <h3>{{ projeto.nome }}</h3>
-              <p>{{projeto.descricao }}</p>
+              <h3>{{ projeto.titulo }}</h3>
+              <p>{{ projeto.descricao }}</p>
             </div>
           </div>
         {% endfor %}
