@@ -3,6 +3,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'institucional/css/institucional.css' %}">
+<link rel="stylesheet" href="{% static 'css/form_admin.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -75,7 +76,7 @@
   </div>
   <div id="administrador" class="tab-content">
     {% if user.is_authenticated %}
-      <a href="{% url 'administrador' %}" type="submit" class="login-btn">Entrar</a>
+      <a href="{% url 'projetos' %}"><button type="submit" class="entrar-btn">Entrar</button></a>
     {% else %}
       <form class="login-form" method="POST" action="{% url 'login' %}">
         {% csrf_token %}
@@ -96,5 +97,5 @@
 {% endblock %}
 
 {% block script %}
-<script src="{% static 'js/openTab.js' %}"></script>
+<script src="{% static 'js/open_tab.js' %}"></script>
 {% endblock %}

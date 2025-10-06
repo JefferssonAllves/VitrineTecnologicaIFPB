@@ -15,13 +15,14 @@
       <h2>Destaques</h2>
       <div class="grid-projects">
         {% for projeto in projetos %}
-          <!-- Card exemplo -->
           <div class="card">
-            <img src="{{ projeto.imagem.url }}" alt="Projeto 1">
-            <div class="info">
-              <h3>{{ projeto.titulo }}</h3>
-              <p>{{ projeto.descricao }}</p>
-            </div>
+            <a href="{% url 'detalhes_projeto' projeto.id %}">
+              <img src="{{ projeto.imagem.url }}" alt="{{ projeto.titulo }}">
+              <div class="info">
+                <h3>{{ projeto.titulo }}</h3>
+                <p>{{ projeto.descricao }}</p>
+              </div>
+            </a>
           </div>
         {% endfor %}
       </div>

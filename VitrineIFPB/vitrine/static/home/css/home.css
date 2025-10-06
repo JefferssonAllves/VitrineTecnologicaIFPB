@@ -1,4 +1,15 @@
 
+.content {
+  margin-left: 0;
+}
+
+.content h2 {
+  font-size: 50px;
+  color: #b8860b;
+  margin-top: 35px;
+  margin-bottom: 35px;
+}
+
 .grid-projects {
   display: grid;
   grid-template-columns: repeat(auto-fill, 370px);
@@ -47,7 +58,6 @@
 .btn-see-more {
   background: #054911;
   color: #fff;
-  text-decoration: none;
   padding: 14px 30px;
   border-radius: 6px;
   font-size: 17px;

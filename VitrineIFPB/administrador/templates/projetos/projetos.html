@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'administrador/css/admin.css' %}">
+{% endblock %}
+{% block content %}
+<main class="admin-main-container">
+  {% include 'sidebar_admin.html' %}
+  <div class="admin-content-wrapper">
+    <div class="admin-table-section">
+      <h2 class="admin-h2">Projetos Cadastrados</h2>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Categoria</th>
+            <th>Autores</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for projeto in projetos %}
+          <tr>
+            <td data-label="Id">{{ projeto.id }}</td>
+            <td data-label="Título">{{ projeto.titulo }}</td>
+            <td data-label="Categoria">{{ projeto.categoria }}</td>
+            <td data-label="Autores">{{ projeto.autores }}</td>
+            <td data-label="Ações" class="admin-actions">
+              <button class="admin-actions-button"onclick="openEditModalProjeto('{{ projeto.id }}', '{{ projeto.titulo }}', '{{ projeto.descricao }}', '{{ projeto.autores }}', '{{ projeto.categoria }}')">Editar</button>
+              <button class="admin-actions-button"onclick="openDeleteModalProjeto('{{ projeto.id }}', '{{ projeto.titulo }}')">Excluir</button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<!-- MODAL DE EDIÇÃO DE PROJETOS -->
+<div id="modal_edit_projeto" class="modal">
+  <div class="modal-content">
+    <span class="close-button" onclick="closeModal('modal_edit_projeto')">&times;</span>
+    <h2 id="edit_modal_title_projeto">Editar Projeto</h2>
+    <form method="POST" action="{% url 'editar_projeto' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input id="projeto_id" name="projeto_id" type="hidden" value="">
+      <div class="modal-form-group">
+        <label for="projeto_imagem_edit">Imagem do Projeto</label>
+        <input type="file" id="projeto_imagem_edit" name="projeto_imagem" accept="image/*" class="admin-input">
+      </div>
+      <div class="modal-form-group">
+        <label for="projeto_titulo_edit">Título</label>
+        <input type="text" id="projeto_titulo_edit" name="projeto_titulo" placeholder="Digite o título do projeto"
+          class="admin-input">
+      </div>
+      <div class="modal-form-group">
+        <label for="projeto_descricao_edit">Descrição</label>
+        <textarea id="projeto_descricao_edit" name="projeto_descricao" rows="4" placeholder="Descreva o projeto"
+          class="admin-input"></textarea>
+      </div>
+      <div class="modal-form-group">
+        <label for="projeto_autores_edit">Autores</label>
+        <input type="text" id="projeto_autores_edit" name="projeto_autores" placeholder="Nome dos autores"
+          class="admin-input">
+      </div>
+      <div class="modal-form-group">
+        <label for="projeto_categoria_edit">Categoria</label>
+        <select id="projeto_categoria_edit" name="projeto_categoria" class="admin-input">
+          <option value="patente">Patente</option>
+          <option value="software">Software</option>
+        </select>
+      </div>
+      <div class="modal-form-group">
+        <label for="projeto_areas_edit">Área do Conhecimento</label>
+        <select id="projeto_areas_edit" name="projeto_areas" class="admin-input" multiple>
+          {% for categoria in categorias %}
+          <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button type="submit" class="admin-button">Salvar alterações</button>
+        <button type="button" class="admin-button delete-button"
+          onclick="closeModal('modal_edit_projeto')">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL DE EXCLUSÃO DE PROJETOS -->
+<div id="modal_delete_projeto" class="modal">
+  <div class="modal-content">
+    <span class="close-button" onclick="closeModal('modal_delete_projeto')">&times;</span>
+    <h2>Confirmar Exclusão</h2>
+    <p id="delete_message_projeto"></p>
+    <form method="POST" action="{% url 'excluir_projeto' %}">
+      {% csrf_token %}
+      <input id="projeto_id_delete" name="projeto_id" type="hidden" value="">
+      <div class="modal-actions">
+        <button type="submit" class="admin-button delete-button">Excluir</button>
+        <button type="button" class="admin-button" onclick="closeModal('modal_delete_projeto')">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+  <script src="{% static 'administrador/js/admin.js' %}"></script>
+  <script src="{% static 'administrador/js/modal_projetos.js' %}"></script>
+{% endblock %}

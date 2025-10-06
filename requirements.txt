@@ -11,6 +11,7 @@ charset-normalizer==3.4.3
 click==8.3.0
 cryptography==46.0.1
 cyclonedx-python-lib==9.1.0
+decouple==0.0.7
 defusedxml==0.7.1
 Django==5.2.6
 dparse==0.6.4

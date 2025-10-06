@@ -8,33 +8,16 @@
 {% block content %}
   <main class="softwares-container">
     <h1 class="page-title">Softwares</h1>
-    <a href="ipsas-game.html" class="software-item">
-      <img src="assets/images/imgTeste1.jpg" alt="IPSAS GAME">
-      <div class="software-info">
-        <h2>IPSAS GAME</h2>
-        <p>Jogo de treinamento baseado em quiz que emite certificado e apresenta questões de contabilidade.</p>
+    {% for projeto in projetos %}
+      <div>
+        <a href="{% url 'detalhes_projeto' projeto.id %}" class="software-item">
+          <img src="{{ projeto.imagem.url }}" alt="IPSAS GAME">
+          <div class="software-info">
+            <h2>{{ projeto.titulo }}</h2>
+            <p>{{projeto.descricao}}</p>
+          </div>
+        </a>
       </div>
-    </a>
-    <a href="ipsas-game.html" class="software-item">
-      <img src="assets/images/imgTeste1.jpg" alt="IPSAS GAME">
-      <div class="software-info">
-        <h2>IPSAS GAME</h2>
-        <p>Jogo de treinamento baseado em quiz que emite certificado e apresenta questões de contabilidade.</p>
-      </div>
-    </a>
-    <a href="ipsas-game.html" class="software-item">
-      <img src="assets/images/imgTeste1.jpg" alt="IPSAS GAME">
-      <div class="software-info">
-        <h2>IPSAS GAME</h2>
-        <p>Jogo de treinamento baseado em quiz que emite certificado e apresenta questões de contabilidade.</p>
-      </div>
-    </a>
-    <a href="ipsas-game.html" class="software-item">
-      <img src="assets/images/imgTeste1.jpg" alt="IPSAS GAME">
-      <div class="software-info">
-        <h2>IPSAS GAME</h2>
-        <p>Jogo de treinamento baseado em quiz que emite certificado e apresenta questões de contabilidade.</p>
-      </div>
-    </a>
+    {% endfor %}
   </main>
 {% endblock %}

@@ -1,19 +1,24 @@
-#!/bin/bash
-set -e
+#!/bin/sh
+set -e  # Sai no primeiro erro
 
-echo "Iniciando o servidor..."
+echo "🚀 Iniciando VitrineIFPB..."
 
-#VERIFICA SE O ARQUIVO DE BANCO DE DADOS EXISTE, SE NÃO, CRIA
-if [ ! -f "/app/db.sqlite3" ]; then
-  echo "Criando banco de dados SQLite..."
-  touch /app/db.sqlite3
-fi
+# Aguarda o MySQL ficar pronto (se estiver usando)
+echo "⏳ Aguardando banco de dados..."
+while ! nc -z mysql 3306; do
+  sleep 1
+done
+echo "✅ Banco de dados pronto!"
 
-echo "Aplicando migrações..."
+# Aplica migrações
+echo "🔄 Aplicando migrações..."
 python manage.py migrate --noinput
 
-echo "Verificando configuração..."
-python manage.py check --deploy
+# Coleta arquivos estáticos
+echo "📁 Coletando arquivos estáticos..."
+python manage.py collectstatic --noinput
 
 echo "✅ Configuração concluída! Iniciando servidor..."
-exec "$@"
+
+# Inicia o servidor
+exec python manage.py runserver 0.0.0.0:8000

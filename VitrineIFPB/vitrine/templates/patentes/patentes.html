@@ -13,10 +13,14 @@
       <h2>Todas as Patentes</h2>
       <div class="patent-list">
         {% for projeto in projetos %}
-          <a href="#" class="patent-item">
+          <a href="{% url 'detalhes_projeto' projeto.id %}" class="patent-item">
             <img src="{{ projeto.imagem.url }}" alt="Imagem da patente">
             <div class="patent-info">
-              <span class="tags">Destaque · Energia · Nanotecnologia · Patente Concedida</span>
+              <div class="tags-container">
+                {% for area_conhecimento in projeto.areas_conhecimento.all %}
+                  <span class="tags">{{ area_conhecimento.nome }}</span>
+                {% endfor %}
+                </div>
               <h3 class="patent-title">{{ projeto.titulo }}</h3>
             </div>
           </a>

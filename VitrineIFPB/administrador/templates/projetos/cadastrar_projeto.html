@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'administrador/css/admin.css' %}">
+{% endblock %}
+{% block content %}
+<main class="admin-main-container">
+  {% include 'sidebar_admin.html' %}
+  <div class="admin-content-wrapper">
+    <section id="cadastrar-projeto-section">
+      <h2 class="admin-h2">Cadastrar Novo Projeto</h2>
+      <div class="admin-form-section">
+        <form method="POST" action="{% url 'cadastrar_projeto' %}" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="admin-form-group">
+            <label for="imagem-projeto">Imagem do Projeto</label>
+            <input type="file" id="imagem-projeto" name="projeto_imagem" accept="image/*">
+          </div>
+          <div class="admin-form-group">
+            <label for="projeto-titulo">Título</label>
+            <input type="text" id="projeto-titulo" placeholder="Digite o título do projeto" name="projeto_titulo" class="admin-input">
+          </div>
+          <div class="admin-form-group">
+            <label for="projeto-desc">Descrição</label>
+            <textarea id="projeto-desc" rows="3" placeholder="Descrição do projeto" name="projeto_descricao" class="admin-input"></textarea>
+          </div>
+          <div class="admin-form-group">
+            <label for="projeto-autores">Autores</label>
+            <input type="text" id="projeto-autores" placeholder="Nome dos autores" name="projeto_autores" class="admin-input">
+          </div>
+          <div class="admin-form-group">
+            <label for="projeto-categoria">Categoria</label>
+            <select id="projeto-categoria" name="projeto_categoria" class="admin-input">
+              <option value="">Selecione a Categoria</option>
+              <option value="patente">Patente</option>
+              <option value="software">Software</option>
+            </select>
+          </div>
+          <div class="admin-form-group">
+            <label for="projeto-areas">Área do Conhecimento</label>
+            <select id="projeto-areas" name="projeto-areas[]" class="admin-input" multiple>
+              <option value="saude">Saúde</option>
+              <option value="engenharia">Engenharia</option>
+              <option value="robotica">Robótica</option>
+            </select>
+          </div>
+          <button type="submit" class="admin-button">Cadastrar Projeto</button>
+        </form>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock %}
+{% block script %}
+<script src="{% static 'administrador/js/admin.js' %}"></script>
+{% endblock %}

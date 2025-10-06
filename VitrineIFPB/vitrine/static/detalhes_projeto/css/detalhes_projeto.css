@@ -1,0 +1,59 @@
+/* PROJETOS */
+.projeto-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+  color: #333;
+  line-height: 1.7;
+}
+
+.btn-voltar {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  background: #054911;
+  color: #fff;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+.btn-voltar:hover {
+  background: #168229;
+}
+
+.projeto-titulo {
+  font-size: 28px;
+  margin-bottom: 8px;
+  color: #b8860b;
+}
+
+.projeto-categoria {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+.projeto-categoria span {
+  color: #054911;
+  font-weight: 600;
+}
+
+.projeto-imagem {
+  text-align: center;
+  margin: 20px 0 40px;
+}
+.projeto-imagem img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.projeto-section {
+  margin-bottom: 30px;
+}
+.projeto-section h2 {
+  font-size: 20px;
+  color: #054911;
+  margin-bottom: 10px;
+}
+.projeto-section p {
+  font-size: 16px;
+}
