@@ -50,10 +50,12 @@ def cadastrar_projeto(request):
     projeto = Projeto(titulo=titulo, descricao=descricao, autores=autores, categoria=categoria, imagem=imagem)
     projeto.save()
 
+    print(areas)
+
     for area in areas:
       projeto.areas_conhecimento.add(Categoria.objects.get(id=int(area)))
   else:
-    return render(request, 'projetos/cadastrar_projeto.html')
+    return render(request, 'projetos/cadastrar_projeto.html', {'categorias':Categoria.objects.all()})
   return redirect('projetos')
 
 def editar_projeto(request):

@@ -38,11 +38,11 @@
             </select>
           </div>
           <div class="admin-form-group">
-            <label for="projeto-areas">Área do Conhecimento</label>
-            <select id="projeto-areas" name="projeto-areas[]" class="admin-input" multiple>
-              <option value="saude">Saúde</option>
-              <option value="engenharia">Engenharia</option>
-              <option value="robotica">Robótica</option>
+            <label for="projeto_areas">Área do Conhecimento</label>
+            <select id="projeto_areas" name="projeto_areas" class="admin-input" multiple>
+              {% for categoria in categorias %}
+                <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+              {% endfor %}
             </select>
           </div>
           <button type="submit" class="admin-button">Cadastrar Projeto</button>

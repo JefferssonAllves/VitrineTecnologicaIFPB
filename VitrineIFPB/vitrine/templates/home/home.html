@@ -13,7 +13,7 @@
     <!-- Conteúdo principal -->
     <main class="content">
       <h2>Destaques</h2>
-      <div class="grid-projects">
+      <div class="grid-projects" id="grid-projects">
         {% for projeto in projetos %}
           <div class="card">
             <a href="{% url 'detalhes_projeto' projeto.id %}">
@@ -32,4 +32,8 @@
   <div class="see-more">
     <a href="{% url 'patentes' %}" class="btn-see-more">Todas as Patentes</a>
   </div>
+{% endblock %}
+{% block script %}
+  <script src="{% static 'vitrine/js/pesquisa.js' %}"></script>
+  <script src="{% static 'home/js/exibir_pesquisa.js' %}"></script>
 {% endblock %}

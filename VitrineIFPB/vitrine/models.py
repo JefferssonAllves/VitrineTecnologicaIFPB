@@ -8,6 +8,10 @@ class Categoria(models.Model):
   def __str__(self):
     return self.nome
 
+  @property
+  def quantidade_projetos(self):
+    return self.projetos.count()
+
 # Tabela de projetos
 class Projeto(models.Model):
   titulo = models.CharField(max_length=100)

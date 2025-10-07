@@ -11,7 +11,7 @@
     {% include 'sidebar.html' %}
     <main class="content">
       <h2>Todas as Patentes</h2>
-      <div class="patent-list">
+      <div id="patent-list">
         {% for projeto in projetos %}
           <a href="{% url 'detalhes_projeto' projeto.id %}" class="patent-item">
             <img src="{{ projeto.imagem.url }}" alt="Imagem da patente">
@@ -27,5 +27,10 @@
         {% endfor %}
       </div>
     </main>
+
   </div>
+{% endblock %}
+{% block script %}
+<script src="{% static 'vitrine/js/pesquisa.js' %}"></script>
+<script src="{% static 'patentes/js/exibir_pesquisa.js' %}"></script>
 {% endblock %}
