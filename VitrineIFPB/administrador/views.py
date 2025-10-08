@@ -32,11 +32,9 @@ def cadastrar_admin(request):
 
   return render(request, 'administrador/cadastrar_admin.html')
 
-
-
 #TODO CONTROLE DE PROJETOS
 def projetos(request):
-  return render(request, 'projetos/projetos.html', {'projetos':Projeto.objects.all()})
+  return render(request, 'projetos/projetos.html', {'projetos':Projeto.objects.all(), 'categorias':Categoria.objects.all()})
 
 def cadastrar_projeto(request):
   if request.method == 'POST':
@@ -49,8 +47,6 @@ def cadastrar_projeto(request):
 
     projeto = Projeto(titulo=titulo, descricao=descricao, autores=autores, categoria=categoria, imagem=imagem)
     projeto.save()
-
-    print(areas)
 
     for area in areas:
       projeto.areas_conhecimento.add(Categoria.objects.get(id=int(area)))

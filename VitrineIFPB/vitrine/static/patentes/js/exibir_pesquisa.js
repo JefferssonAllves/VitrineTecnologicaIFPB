@@ -10,7 +10,7 @@ function exibirResultados(projetos) {
   }
 
   container.innerHTML = projetos.map(projeto => `
-    <a href="/vitrine/detalhes_projeto/${projeto.id}/" class="patent-item">
+    <a href="/vitrine/detalhes_projeto/id=${projeto.id}/" class="patent-item">
       <img src="${projeto.imagem_url}" alt="${projeto.titulo}" class="patent-image">
       <div class="patent-info">
         <div class="tags-container">

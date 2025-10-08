@@ -8,8 +8,8 @@
 <main class="projeto-container">
   <a href="#" class="btn-voltar" onclick="window.history.go(-1)">← Voltar</a>
 
-  <h1 class="projeto-titulo">{{ projeto.nome }}</h1>
-  <p class="projeto-categoria">Categoria:
+  <h1 class="projeto-titulo">{{ projeto.titulo }}</h1>
+  <p class="projeto-categoria">Categorias:
     {% for area_conhecimento in projeto.areas_conhecimento.all %}
       <span>{{ area_conhecimento.nome }}</span>
     {% endfor %}
@@ -20,37 +20,15 @@
   </div>
 
   <section class="projeto-section">
-    <h2>O que é</h2>
-    <p>
-      {{ projeto.descricao }}
-    </p>
+    <h2>Descrição</h2>
+    <p>{{ projeto.descricao }}</p>
   </section>
 
   <section class="projeto-section">
     <h2>Inventores</h2>
     <p>
-      Jeffersson Kaun Alve83% de armazenamento usados de Lima; Tomás Soares de Freitas
+      {{ projeto.autores }}
     </p>
-  </section>
-
-  <section class="projeto-section">
-    <h2>Estágio de desenvolvimento</h2>
-    <p>TRL: Grau 4 – Validação da tecnologia em ambiente laboratorial.</p>
-  </section>
-
-  <section class="projeto-section">
-    <h2>Diferencial Tecnológico</h2>
-    <p>
-      Os marcadores de combustível atuam como substâncias usadas nos métodos tradicionais de marcação de
-      combustíveis,
-      mas apresentam vantagens de maior sensibilidade, seletividade e estabilidade.
-    </p>
-  </section>
-
-  <!-- Bloco extra  -->
-  <section class="projeto-section">
-    <h2>Informações adicionais</h2>
-    <p>Adicionar.</p>
   </section>
 </main>
 {% endblock %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Projeto, Categoria
+from time import sleep
 
 #TODO BUSCADOR DE PROJETOS
 import json
@@ -7,15 +8,25 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.db.models import Q
 
+#TODO FILTRO POR CATEGORIA
+from django import template
 
 def home(request):
   if request.method == 'GET':
-    projetos = Projeto.objects.all()
+    categoria_id = request.GET.get('categoria')
+    if categoria_id:
+      projetos = Projeto.objects.filter(areas_conhecimento__id=categoria_id)
+    else:
+      projetos = Projeto.objects.all()
   return render(request, 'home/home.html', {'projetos': projetos, 'categorias': Categoria.objects.all()})
 
 def patentes(request):
   if request.method == 'GET':
-    projetos = Projeto.objects.filter(categoria='patente')
+    categoria_id = request.GET.get('categoria')
+    if categoria_id:
+      projetos = Projeto.objects.filter(categoria='patente', areas_conhecimento__id=categoria_id)
+    else:
+      projetos = Projeto.objects.filter(categoria='patente')
   return render(request, 'patentes/patentes.html', {'projetos': projetos, 'categorias': Categoria.objects.all()})
 
 def softwares(request):
@@ -56,6 +67,12 @@ def buscar_projetos(request):
         'imagem_url': projeto.imagem.url if projeto.imagem else '',
         'areas_conhecimento': [area.nome for area in projeto.areas_conhecimento.all()]
       })
-
     return JsonResponse({'projetos': projetos_json})
   return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+#TODO FILTRO POR CATEGORIA
+register = template.Library()
+
+@register.filter
+def filter_por_categoria(projetos, categoria_id):
+  return projetos.filter(areas_conhecimento__id=categoria_id)

@@ -8,34 +8,37 @@
 {% block content %}
 <main class="admin-main-container">
   {% include 'sidebar_admin.html' %}
-  <section id="categorias-section">
-    <h2 class="admin-h2">Categorias Cadastradas</h2>
-    <div class="admin-table-section">
-      <table class="admin-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Categoria</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for categoria in categorias %}
-          <tr>
-            <td data-label="Categoria">{{ categoria.nome }}</td>
-            <td data-label="Descrição">{{ categoria.descricao }}</td>
-            <td data-label="Ações" class="admin-actions">
-              <button class="admin-actions-button"
-                onclick="openEditModalCategoria('{{ categoria.id }}', '{{ categoria.nome }}', '{{ categoria.descricao }}')">Editar</button>
-              <button class="admin-actions-button"
-                onclick="openDeleteModalCategoria('{{ categoria.id }}', '{{ categoria.nome }}')">Excluir</button>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  </section>
+  <div class="admin-content-wrapper">
+
+    <section id="categorias-section">
+      <h2 class="admin-h2">Categorias Cadastradas</h2>
+      <div class="admin-table-section">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Categoria</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for categoria in categorias %}
+            <tr>
+              <td data-label="id">{{ categoria.id }}</td>
+              <td data-label="nome">{{ categoria.nome }}</td>
+              <td data-label="Ações" class="admin-actions">
+                <button class="admin-actions-button"
+                  onclick="openEditModalCategoria('{{ categoria.id }}', '{{ categoria.nome }}', '{{ categoria.descricao }}')">Editar</button>
+                <button class="admin-actions-button"
+                  onclick="openDeleteModalCategoria('{{ categoria.id }}', '{{ categoria.nome }}')">Excluir</button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
 </main>
 
 <!-- MODAL DE EDIÇÃO DE CATEGORIAS -->

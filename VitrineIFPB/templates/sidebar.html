@@ -11,7 +11,7 @@
     <h3>Categorias</h3>
     <ul>
       {% for categoria in categorias %}
-        <li><a href="#">{{ categoria.nome }} ({{ categoria.quantidade_projetos }})</a></li>
+        <li><a href="?categoria={{ categoria.id }}">{{ categoria.nome }} ({{ categoria.quantidade_projetos }})</a></li>
       {% endfor %}
     </ul>
   </div>

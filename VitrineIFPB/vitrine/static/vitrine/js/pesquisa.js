@@ -5,11 +5,11 @@ function realizarBusca(termo) {
 
   clearTimeout(timeoutBusca);
 
-
   timeoutBusca = setTimeout(async () => {
     try {
       const csrfToken = document.querySelector("[name=csrfmiddlewaretoken]").value;
 
+      console.log("ESPERANDO RESPOSTA");
       const response = await fetch(urlBusca, {
         method: "POST",
         headers: {
@@ -21,7 +21,9 @@ function realizarBusca(termo) {
         }),
       });
 
+
       const data = await response.json();
+      console.log("RESPOSTA RECEBIDA:", data);
       exibirResultados(data.projetos);
 
     } catch (error) {

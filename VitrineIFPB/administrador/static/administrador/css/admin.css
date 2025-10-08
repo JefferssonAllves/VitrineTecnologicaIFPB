@@ -168,6 +168,9 @@
     position: relative;
     animation: fadeIn 0.5s;
 }
+.modal-content form{
+    margin-top: 15px;
+}
 
 .close-button {
     color: #aaa;

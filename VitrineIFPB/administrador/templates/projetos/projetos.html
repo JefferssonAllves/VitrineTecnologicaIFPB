@@ -8,35 +8,34 @@
 <main class="admin-main-container">
   {% include 'sidebar_admin.html' %}
   <div class="admin-content-wrapper">
-    <div class="admin-table-section">
-      <h2 class="admin-h2">Projetos Cadastrados</h2>
-      <table class="admin-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Título</th>
-            <th>Categoria</th>
-            <th>Autores</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for projeto in projetos %}
-          <tr>
-            <td data-label="Id">{{ projeto.id }}</td>
-            <td data-label="Título">{{ projeto.titulo }}</td>
-            <td data-label="Categoria">{{ projeto.categoria }}</td>
-            <td data-label="Autores">{{ projeto.autores }}</td>
-            <td data-label="Ações" class="admin-actions">
-              <button class="admin-actions-button"onclick="openEditModalProjeto('{{ projeto.id }}', '{{ projeto.titulo }}', '{{ projeto.descricao }}', '{{ projeto.autores }}', '{{ projeto.categoria }}')">Editar</button>
-              <button class="admin-actions-button"onclick="openDeleteModalProjeto('{{ projeto.id }}', '{{ projeto.titulo }}')">Excluir</button>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+    <h2 class="admin-h2">Projetos Cadastrados</h2>
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Categoria</th>
+          <th>Autores</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for projeto in projetos %}
+        <tr>
+          <td data-label="Id">{{ projeto.id }}</td>
+          <td data-label="Título">{{ projeto.titulo }}</td>
+          <td data-label="Categoria">{{ projeto.categoria }}</td>
+          <td data-label="Autores">{{ projeto.autores }}</td>
+          <td data-label="Ações" class="admin-actions">
+            <button class="admin-actions-button"onclick="openEditModalProjeto('{{ projeto.id }}', '{{ projeto.titulo }}', '{{ projeto.descricao }}', '{{ projeto.autores }}', '{{ projeto.categoria }}')">Editar</button>
+            <button class="admin-actions-button"onclick="openDeleteModalProjeto('{{ projeto.id }}', '{{ projeto.titulo }}')">Excluir</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
+
 </main>
 
 <!-- MODAL DE EDIÇÃO DE PROJETOS -->
@@ -77,7 +76,7 @@
         <label for="projeto_areas_edit">Área do Conhecimento</label>
         <select id="projeto_areas_edit" name="projeto_areas" class="admin-input" multiple>
           {% for categoria in categorias %}
-          <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+            <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
           {% endfor %}
         </select>
       </div>
