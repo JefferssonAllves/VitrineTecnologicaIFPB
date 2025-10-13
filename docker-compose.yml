@@ -14,14 +14,14 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     ports:
-      - "3307:3306"
+      - "3306:3306"
     networks:
       - vitrine-network
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
-      interval: 10s   #   Verifica a cada 10 segundos
-      timeout: 5s     #   Espera 5 segundos por resposta
-      retries: 5      #   Tenta 5 vezes antes de declarar "falha"
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   web:
     build: .

@@ -2,7 +2,13 @@ FROM python:3.13-slim-bullseye
 
 ENV PYTHONUNBUFFERED=1
 
+# Definir WORKDIR primeiro
 WORKDIR /app
+
+# Copiar arquivos para o WORKDIR
+COPY VitrineIFPB /app/VitrineIFPB
+COPY scripts/entrypoint.sh /app/scripts/entrypoint.sh
+COPY requirements.txt /app/requirements.txt
 
 # Dependências do sistema
 RUN apt-get update && apt-get install -y \
@@ -14,19 +20,17 @@ RUN apt-get update && apt-get install -y \
   && rm -rf /var/lib/apt/lists/*
 
 # Dependências Python
-COPY requirements.txt .
 RUN pip install --upgrade pip && \
-  pip install --no-cache-dir -r requirements.txt
+  pip install --no-cache-dir -r /app/requirements.txt
 
-# Aplicação
-COPY . .
+# Dar permissão ao entrypoint (AGORA no caminho correto)
+RUN chmod +x /app/scripts/entrypoint.sh
 
-# 👈 PRIMEIRO copia o script e dá permissão
-COPY scripts/entrypoint.sh .
-RUN chmod +x entrypoint.sh  # 👈 Como root ainda
+# Mudar para o diretório da aplicação
+WORKDIR /app/VitrineIFPB
 
-# 👈 DEPOIS cria usuário e muda
-RUN useradd -m appuser && chown -R appuser:appuser /app
-USER appuser
+# Entrypoint com caminho absoluto
+ENTRYPOINT ["/app/scripts/entrypoint.sh"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 EXPOSE 8000

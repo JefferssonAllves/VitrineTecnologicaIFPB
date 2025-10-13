@@ -20,5 +20,5 @@ python manage.py collectstatic --noinput
 
 echo "✅ Configuração concluída! Iniciando servidor..."
 
-# Inicia o servidor
+# Inicia o servidor8
 exec python manage.py runserver 0.0.0.0:8000
