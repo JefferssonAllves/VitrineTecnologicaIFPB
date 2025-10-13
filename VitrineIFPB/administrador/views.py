@@ -12,6 +12,7 @@ def admin(request):
 def login(request):
   email = request.POST.get('email')
   senha = request.POST.get('senha')
+
   user = authenticate(request, username=email, password=senha)
 
   if user is not None:
@@ -27,7 +28,6 @@ def cadastrar_admin(request):
   if request.method == 'POST':
     email = request.POST.get('email')
     senha = request.POST.get('senha')
-    print(email, senha)
     User.objects.create_user(username=email, password=senha)
 
   return render(request, 'administrador/cadastrar_admin.html')

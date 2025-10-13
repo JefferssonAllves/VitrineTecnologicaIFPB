@@ -20,3 +20,11 @@ function exibirResultados(projetos) {
       </a>
     </div>`).join('');
 }
+
+function carregandoResultados() {
+  const container = document.getElementById('grid-projects');
+  container.innerHTML = `
+    <div class="carregando">
+      <p>Carregando...</p>
+    </div>`;
+}

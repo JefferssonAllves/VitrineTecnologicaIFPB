@@ -8,6 +8,8 @@ class Categoria(models.Model):
   def __str__(self):
     return self.nome
 
+
+  #TODO 
   @property
   def quantidade_projetos(self):
     return self.projetos.count()

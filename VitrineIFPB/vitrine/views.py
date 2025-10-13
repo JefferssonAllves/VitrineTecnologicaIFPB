@@ -27,7 +27,7 @@ def patentes(request):
       projetos = Projeto.objects.filter(categoria='patente', areas_conhecimento__id=categoria_id)
     else:
       projetos = Projeto.objects.filter(categoria='patente')
-  return render(request, 'patentes/patentes.html', {'projetos': projetos, 'categorias': Categoria.objects.all()})
+  return render(request, 'patentes/patentes.html', {'projetos': projetos, 'categorias': Categoria.objects.filter(projetos__categoria='patente').distinct()})
 
 def softwares(request):
   if request.method == 'GET':
@@ -38,16 +38,15 @@ def detalhes_projeto(request, projeto_id):
   projeto = Projeto.objects.get(id=projeto_id)
   return render(request, 'detalhes_projeto/detalhes_projeto.html', {'projeto': projeto})
 
-@csrf_exempt
 def buscar_projetos(request):
   if request.method == 'POST':
-    body_unicode = request.body.decode('utf-8')
-    body = json.loads(body_unicode)
+    body = json.loads(request.body)
     termo = body['termo']
 
     if not termo:
       projetos = Projeto.objects.all()
     else:
+      #TODO Filtra usando Q objects para buscas complexas
       projetos = Projeto.objects.filter(
         Q(titulo__icontains=termo) |
         Q(descricao__icontains=termo) |
@@ -69,10 +68,3 @@ def buscar_projetos(request):
       })
     return JsonResponse({'projetos': projetos_json})
   return JsonResponse({'error': 'Invalid request method'}, status=400)
-
-#TODO FILTRO POR CATEGORIA
-register = template.Library()
-
-@register.filter
-def filter_por_categoria(projetos, categoria_id):
-  return projetos.filter(areas_conhecimento__id=categoria_id)

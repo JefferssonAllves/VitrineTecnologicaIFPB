@@ -20,3 +20,11 @@ function exibirResultados(projetos) {
       </div>
     </a>`).join('');
 }
+
+function carregandoResultados() {
+  const container = document.getElementById('patent-list');
+  container.innerHTML = `
+    <div class="carregando">
+      <p>Carregando...</p>
+    </div>`;
+}
