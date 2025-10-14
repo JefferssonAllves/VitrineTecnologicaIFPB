@@ -6,8 +6,9 @@ urlpatterns = [
 
   path('patentes/', views.patentes, name='patentes'),
   path('softwares/', views.softwares, name='softwares'),
-  path('detalhes_projeto/id=<int:projeto_id>/', views.detalhes_projeto, name='detalhes_projeto'),
+  path('institucional/', views.institucional, name='institucional'),
 
+  path('detalhes_projeto/id=<int:projeto_id>/', views.detalhes_projeto, name='detalhes_projeto'),
   path('buscar_projetos/', views.buscar_projetos, name='buscar_projetos'),
 
 ]

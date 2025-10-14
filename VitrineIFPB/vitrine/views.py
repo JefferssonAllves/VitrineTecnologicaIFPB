@@ -34,6 +34,9 @@ def softwares(request):
     projetos = Projeto.objects.filter(categoria='software')
   return render(request, 'softwares/softwares.html', {'projetos': projetos})
 
+def institucional(request):
+  return render(request, 'institucional/institucional.html')
+
 def detalhes_projeto(request, projeto_id):
   projeto = Projeto.objects.get(id=projeto_id)
   return render(request, 'detalhes_projeto/detalhes_projeto.html', {'projeto': projeto})

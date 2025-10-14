@@ -41,8 +41,23 @@ services:
     networks:
       - vitrine-network
 
+  nginx:
+    build: ./nginx
+    container_name: vitrine_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./VitrineIFPB/staticfiles:/app/VitrineIFPB/staticfiles
+      - ./VitrineIFPB/media:/app/VitrineIFPB/media
+    depends_on:
+      - web
+    networks:
+      - vitrine-network
+
 volumes:
   mysql_data:
+  static_volume:
+  media_volume:
 
 networks:
   vitrine-network:

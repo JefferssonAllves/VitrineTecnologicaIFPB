@@ -3,7 +3,7 @@ from decouple import Config, RepositoryEnv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-DOTENV_FILE = BASE_DIR.parent / 'dotenv_files' / '.env'
+DOTENV_FILE = BASE_DIR.parent / '.env'
 config = Config(RepositoryEnv(DOTENV_FILE))
 
 
@@ -31,7 +31,6 @@ INSTALLED_APPS = [
 
     #MY APPS
     'vitrine',
-    'institucional',
     'administrador',
 ]
 
@@ -138,11 +137,18 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'  # URL para acessar as imagens
 MEDIA_ROOT = BASE_DIR / 'media'  # Pasta física
 
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/vitrine/institucional/'
 LOGOUT_REDIRECT_URL = '/vitrine/home/'
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost',
+    'http://127.0.0.1',
+    'http://0.0.0.0',
+]
+
+
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
