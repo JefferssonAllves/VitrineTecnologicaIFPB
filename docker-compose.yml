@@ -1,4 +1,3 @@
-
 services:
   mysql:
     image: mysql:8.0
@@ -25,7 +24,7 @@ services:
 
   web:
     build: .
-    container_name: vitrineifpb_web
+    container_name: vitrine_web
     env_file:
       - .env
     environment:

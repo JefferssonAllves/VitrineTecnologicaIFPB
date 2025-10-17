@@ -1,15 +1,11 @@
 from django.shortcuts import render
 from .models import Projeto, Categoria
-from time import sleep
 
 #TODO BUSCADOR DE PROJETOS
 import json
-from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.db.models import Q
 
-#TODO FILTRO POR CATEGORIA
-from django import template
 
 def home(request):
   if request.method == 'GET':
@@ -41,6 +37,8 @@ def detalhes_projeto(request, projeto_id):
   projeto = Projeto.objects.get(id=projeto_id)
   return render(request, 'detalhes_projeto/detalhes_projeto.html', {'projeto': projeto})
 
+
+#FUNCAO PARA BUSCAR PROJETOS ATRAVES DA BARRA DE PESQUISA
 def buscar_projetos(request):
   if request.method == 'POST':
     body = json.loads(request.body)

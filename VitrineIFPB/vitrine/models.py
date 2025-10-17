@@ -9,7 +9,7 @@ class Categoria(models.Model):
     return self.nome
 
 
-  #TODO 
+  #TODO propriedade para contar a quantidade de projetos em cada categoria
   @property
   def quantidade_projetos(self):
     return self.projetos.count()
