@@ -5,13 +5,13 @@
   <link rel="stylesheet" href="{% static 'detalhes_projeto/css/detalhes_projeto.css' %}">
 {% endblock %}
 {% block content %}
-<main class="projeto-container">
+<div class="projeto-container">
   <a href="#" class="btn-voltar" onclick="window.history.go(-1)">← Voltar</a>
 
   <h1 class="projeto-titulo">{{ projeto.titulo }}</h1>
   <p class="projeto-categoria">Categorias:
-    {% for area_conhecimento in projeto.areas_conhecimento.all %}
-      <span>{{ area_conhecimento.nome }}</span>
+    {% for categoria in projeto.categorias.all %}
+      <span>{{ categoria.nome }}</span>
     {% endfor %}
   </p>
 
@@ -30,5 +30,5 @@
       {{ projeto.autores }}
     </p>
   </section>
-</main>
+</div>
 {% endblock %}

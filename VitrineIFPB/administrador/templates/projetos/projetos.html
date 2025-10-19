@@ -3,40 +3,53 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'administrador/css/admin.css' %}">
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
 {% endblock %}
-{% block content %}
-<main class="admin-main-container">
-  {% include 'sidebar_admin.html' %}
-  <div class="admin-content-wrapper">
-    <h2 class="admin-h2">Projetos Cadastrados</h2>
-    <table class="admin-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Título</th>
-          <th>Categoria</th>
-          <th>Autores</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for projeto in projetos %}
-        <tr>
-          <td data-label="Id">{{ projeto.id }}</td>
-          <td data-label="Título">{{ projeto.titulo }}</td>
-          <td data-label="Categoria">{{ projeto.categoria }}</td>
-          <td data-label="Autores">{{ projeto.autores }}</td>
-          <td data-label="Ações" class="admin-actions">
-            <button class="admin-actions-button"onclick="openEditModalProjeto('{{ projeto.id }}', '{{ projeto.titulo }}', '{{ projeto.descricao }}', '{{ projeto.autores }}', '{{ projeto.categoria }}')">Editar</button>
-            <button class="admin-actions-button"onclick="openDeleteModalProjeto('{{ projeto.id }}', '{{ projeto.titulo }}')">Excluir</button>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
 
-</main>
+{% block content %}
+<div class="container">
+  {% include 'sidebar_admin.html' %}
+  <div class="content">
+    <h2 class="admin-h2">Projetos Cadastrados</h2>
+    <div class="admin-content-wrapper">
+      <form action="{% url 'buscar_projetos' %}" method="GET">
+        {% csrf_token %}
+        <input type="text" placeholder="Pesquisar projetos:" id="campo-busca">
+      </form>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Setor de Lotação</th>
+            <th>Ano do depósito</th>
+            <th>Status</th>
+            <th>Observações de Tramitação</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="corpo-tabela" data-edit-icon="{% static 'administrador/icons/edit.png' %}" data-delete-icon="{% static 'administrador/icons/delete.png' %}">
+          {% for projeto in projetos %}
+          <tr>
+            <td data-label="Id">{{ projeto.id }}</td>
+            <td data-label="Título">{{ projeto.titulo }}</td>
+            <td data-label="Setor de Lotação">{{ projeto.setor_lotacao }}</td>
+            <td data-label="Ano do depósito">{{ projeto.ano_deposito }}</td>
+            <td data-label="Status">{{ projeto.status }}</td>
+            <td data-label="Observações de Tramitação">{{ projeto.observacoes }}</td>
+            <td data-label="Ações" class="admin-actions">
+              <a href=""><img src="{% static 'administrador/icons/edit.png' %}" alt="" width="24" height="24"></a>
+              <a href=""><img src="{% static 'administrador/icons/delete.png' %}" alt="" width="26" height="26"></a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p>Total de projetos cadastrados: <span>{{ projetos|length }}</span></p>
+    </div>
+  </div>
+</div>
+
 
 <!-- MODAL DE EDIÇÃO DE PROJETOS -->
 <div id="modal_edit_projeto" class="modal">
@@ -108,6 +121,8 @@
 {% endblock %}
 
 {% block script %}
+  <script src="{% static 'js/pesquisa.js' %}"></script>
   <script src="{% static 'administrador/js/admin.js' %}"></script>
   <script src="{% static 'administrador/js/modal_projetos.js' %}"></script>
+  <script src="{% static 'administrador/js/projetos.js' %}"></script>
 {% endblock %}

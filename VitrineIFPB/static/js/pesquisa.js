@@ -20,8 +20,8 @@ function realizarBusca(termo) {
         }),
       });
 
-
       const data = await response.json();
+      console.log("Resposta recebida:", data);
       exibirResultados(data.projetos);
 
     } catch (error) {

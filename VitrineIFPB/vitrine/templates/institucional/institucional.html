@@ -8,7 +8,10 @@
 
 {% block content %}
 <!-- Container principal -->
-<main class="institucional-container">
+
+<div class="institucional-container">
+
+
   <h1 class="page-title">Institucional</h1>
 
   <div class="tabs">
@@ -35,44 +38,7 @@
     </p>
   </div>
   <div id="formularios" class="tab-content">
-    <form class="vitrine-form">
-      <div class="form-group">
-        <label for="imagem">Imagem do Projeto</label>
-        <input type="file" id="imagem" name="imagem" accept="image/*" required>
-      </div>
-      <div class="form-group">
-        <label for="titulo">Título</label>
-        <input type="text" id="titulo" name="titulo" placeholder="Digite o título do projeto" required>
-      </div>
-      <div class="form-group">
-        <label for="descricao">Descrição</label>
-        <textarea id="descricao" name="descricao" rows="4" placeholder="Descreva o projeto" required></textarea>
-      </div>
-      <div class="form-group">
-        <label for="autores">Autores</label>
-        <input type="text" id="autores" name="autores" placeholder="Digite os nomes dos autores" required>
-      </div>
-      <div class="form-group">
-        <label for="autores">Categoria</label>
-        <select id="categorias" name="categorias[]" required>
-          <option value="patente">Patente</option>
-          <option value="software">Software</option>
-
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="categorias">Áreas do Conhecimento</label>
-        <select id="areas-conhecimento" name="areas-conhecimento[]" multiple required>
-          <option value="patente">Saúde</option>
-          <option value="software">Engenharia</option>
-          <option value="inovacao">Robótica</option>
-
-        </select>
-        <small class="hint">Segure CTRL (Windows) ou Command (Mac) para selecionar mais de uma
-          categoria</small>
-      </div>
-      <button type="submit" class="submit-btn">Enviar</button>
-    </form>
+    <p>Em manutenção</p>
   </div>
   <div id="administrador" class="tab-content">
     {% if user.is_authenticated %}
@@ -83,7 +49,7 @@
       <h2>Login do Administrador</h2>
       <div class="form-group">
         <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+        <input type="text" id="email" name="email" placeholder="Digite seu e-mail" required>
       </div>
       <div class="form-group">
         <label for="senha">Senha</label>
@@ -93,7 +59,8 @@
     </form>
     {% endif %}
   </div>
-</main>
+</div>
+
 {% endblock %}
 
 {% block script %}

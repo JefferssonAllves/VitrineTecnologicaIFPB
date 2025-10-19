@@ -2,16 +2,21 @@
 {% load static %}
 
 {% block head %}
-  <link rel="stylesheet" href="{% static 'administrador/css/admin.css' %}">
+<link rel="stylesheet" href="{% static 'administrador/css/admin.css' %}">
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
 {% endblock %}
 
 {% block content %}
-<main class="admin-main-container">
+<div class="container">
   {% include 'sidebar_admin.html' %}
-  <div class="admin-content-wrapper">
-
-    <section id="categorias-section">
-      <h2 class="admin-h2">Categorias Cadastradas</h2>
+  <div class="content">
+    <h2 class="admin-h2">Categorias Cadastradas</h2>
+    <div class="admin-content-wrapper">
+      <form action="">
+        {% csrf_token %}
+        <input type="text" placeholder="Pesquisar projetos:" id="campo-busca">
+      </form>
       <div class="admin-table-section">
         <table class="admin-table">
           <thead>
@@ -27,19 +32,18 @@
               <td data-label="id">{{ categoria.id }}</td>
               <td data-label="nome">{{ categoria.nome }}</td>
               <td data-label="Ações" class="admin-actions">
-                <button class="admin-actions-button"
-                  onclick="openEditModalCategoria('{{ categoria.id }}', '{{ categoria.nome }}', '{{ categoria.descricao }}')">Editar</button>
-                <button class="admin-actions-button"
-                  onclick="openDeleteModalCategoria('{{ categoria.id }}', '{{ categoria.nome }}')">Excluir</button>
+                <button class="admin-actions-button"onclick="openEditModalCategoria('{{ categoria.id }}', '{{ categoria.nome }}')">Editar</button>
+                <button class="admin-actions-button"onclick="openDeleteModalCategoria('{{ categoria.id }}', '{{ categoria.nome }}')">Excluir</button>
               </td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
-    </section>
+      <p>Total de categorias cadastradas: <span>{{ categorias|length }}</span></p>
+    </div>
   </div>
-</main>
+</div>
 
 <!-- MODAL DE EDIÇÃO DE CATEGORIAS -->
 <div id="modal_edit_categoria" class="modal">
@@ -53,14 +57,9 @@
         <label for="categoria_nome_edit">Nome da Categoria</label>
         <input type="text" id="categoria_nome_edit" name="categoria_nome" class="admin-input">
       </div>
-      <div class="modal-form-group">
-        <label for="categoria_descricao_edit">Descrição da categoria</label>
-        <textarea id="categoria_descricao_edit" name="categoria_descricao" class="admin-input"></textarea>
-      </div>
       <div class="modal-actions">
         <button type="submit" class="admin-button">Salvar alterações</button>
-        <button type="button" class="admin-button delete-button"
-          onclick="closeModal('modal_edit_categoria')">Cancelar</button>
+        <button type="button" class="admin-button delete-button"onclick="closeModal('modal_edit_categoria')">Cancelar</button>
       </div>
     </form>
   </div>

@@ -1,0 +1,35 @@
+function exibirResultados(projetos) {
+  const corpoTabela = document.getElementById("corpo-tabela");
+  const editIconUrl = corpoTabela.dataset.editIcon;
+  const deleteIconUrl = corpoTabela.dataset.deleteIcon;
+
+  corpoTabela.innerHTML = "";
+
+  if (projetos.length === 0) {
+    corpoTabela.innerHTML = `
+      <tr>
+        <td colspan="7" style="text-align: center;">Nenhum projeto encontrado.</td>
+      </tr>
+    `;
+    return;
+  }
+
+  projetos.forEach(projeto => {
+    const linha = document.createElement("tr");
+
+    linha.innerHTML = `
+      <td data-label="Id">${projeto.id}</td>
+      <td data-label="Título">${projeto.titulo}</td>
+      <td data-label="Setor de Lotação">${projeto.setor_lotacao}</td>
+      <td data-label="Ano do depósito">${projeto.ano_deposito}</td>
+      <td data-label="Status">${projeto.status}</td>
+      <td data-label="Observações de Tramitação">${projeto.observacoes}</td>
+      <td data-label="Ações" class="admin-actions">
+        <a href=""><img src="${editIconUrl}" alt="" width="24" height="24"></a>
+        <a href=""><img src="${deleteIconUrl}" alt="" width="24" height="24"></a>
+      </td>
+    `;
+
+    corpoTabela.appendChild(linha);
+  });
+}

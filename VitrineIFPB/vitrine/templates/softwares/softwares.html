@@ -3,21 +3,26 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'softwares/css/softwares.css' %}">
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
 {% endblock %}
 
 {% block content %}
-  <main class="softwares-container">
-    <h1 class="page-title">Softwares</h1>
-    {% for projeto in projetos %}
-      <div>
-        <a href="{% url 'detalhes_projeto' projeto.id %}" class="software-item">
-          <img src="{{ projeto.imagem.url }}" alt="IPSAS GAME">
-          <div class="software-info">
-            <h2>{{ projeto.titulo }}</h2>
-            <p>{{projeto.descricao}}</p>
-          </div>
-        </a>
-      </div>
-    {% endfor %}
-  </main>
+  <div class="container">
+    {% include 'sidebar.html' %}
+    <div class="software-content">
+      <h1 class="page-title">Softwares</h1>
+      {% for projeto in projetos %}
+        <div>
+          <a href="{% url 'detalhes_projeto' projeto.id %}" class="software-item">
+            <img src="{{ projeto.imagem.url }}" alt="IPSAS GAME">
+            <div class="software-info">
+              <h2>{{ projeto.titulo }}</h2>
+              <p>{{projeto.descricao}}</p>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
 {% endblock %}

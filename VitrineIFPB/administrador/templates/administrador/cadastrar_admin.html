@@ -2,32 +2,31 @@
 {% load static %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'administrador/css/admin.css' %}">
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
 <link rel="stylesheet" href="{% static 'css/form_admin.css' %}">
 
 {% endblock %}
 {% block content %}
-<main class="admin-main-container">
+<div class="container">
   {% include 'sidebar_admin.html' %}
-  <div class="admin-content-wrapper">
-    <section id="cadastrar-admin-section">
-      <h2 class="admin-h2">Cadastrar Novo Administrador</h2>
-      <div class="admin-form-section">
-        <form class="login-form" method="POST" action="{% url 'cadastrar_admin' %}">
-          {% csrf_token %}
-          <div class="form-group">
-            <label for="email-admin">E-mail</label>
-            <input type="email" id="email-admin" name="email" placeholder="Digite o e-mail" required>
-          </div>
-          <div class="form-group">
-            <label for="senha-admin">Senha</label>
-            <input type="password" id="senha-admin" name="senha" placeholder="Digite a senha" required>
-          </div>
-          <button type="submit" class="login-btn">Cadastrar Administrador</button>
-        </form>
-      </div>
-    </section>
+  <div class="content">
+    <h2 class="admin-h2">Cadastrar Novo Administrador</h2>
+    <div class="admin-form-section">
+      <form class="login-form" method="POST" action="{% url 'cadastrar_admin' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="email-admin">E-mail</label>
+          <input type="email" id="email-admin" name="email" placeholder="Digite o e-mail" required>
+        </div>
+        <div class="form-group">
+          <label for="senha-admin">Senha</label>
+          <input type="password" id="senha-admin" name="senha" placeholder="Digite a senha" required>
+        </div>
+        <button type="submit" class="login-btn">Cadastrar Administrador</button>
+      </form>
+    </div>
   </div>
-</main>
+</div>
 {% endblock %}
 {% block script %}
 <script src="{% static 'administrador/js/admin.js' %}"></script>

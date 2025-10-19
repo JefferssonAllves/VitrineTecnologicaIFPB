@@ -6,25 +6,19 @@
   padding: 0 20px;
 }
 
-.page-title {
-  font-size: 32px;
-  margin-bottom: 30px;
-  color: #b8860b;
-}
-
 .software-item {
   display: flex;
+  background: #bb000000;
   align-items: flex-start;
   margin-bottom: 30px;
   padding: 15px;
   border-radius: 8px;
-  text-decoration: none;
   color: inherit;
   transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
 }
 
 .software-item:hover {
-  background: #f9f9f9;
+  background: #fff;
   transform: translateX(5px);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }

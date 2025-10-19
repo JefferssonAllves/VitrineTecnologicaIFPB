@@ -11,7 +11,16 @@
     <h3>Categorias</h3>
     <ul>
       {% for categoria in categorias %}
-        <li><a href="?categoria={{ categoria.id }}">{{ categoria.nome }} ({{ categoria.quantidade_projetos }})</a></li>
+        <li ><a href="?categoria={{ categoria.id }}">{{ categoria.nome }} ({{ categoria.quantidade_projetos }})</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="box">
+    <h3>Campus</h3>
+    <ul>
+      {% for campus in campus %}
+      <li><a href="?campus={{ campus.id }}">{{ campus.nome }} ({{ campus.quantidade_projetos }})</a></li>
       {% endfor %}
     </ul>
   </div>

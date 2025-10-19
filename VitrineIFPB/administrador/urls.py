@@ -21,4 +21,9 @@ urlpatterns = [
   path('editar_categoria/', views.editar_categoria, name='editar_categoria'),
   path('excluir_categoria/', views.excluir_categoria, name='excluir_categoria'),
 
+  path('campus/', views.campus, name='campus'),
+  path('cadastrar_campus/', views.cadastrar_campus, name='cadastrar_campus'),
+  path('editar_campus/', views.editar_campus, name='editar_campus'),
+  path('excluir_campus/', views.excluir_campus, name='excluir_campus'),
+
 ]

@@ -12,10 +12,10 @@
   align-items: center;
   border-bottom: 1px solid #ddd;
   padding: 15px;
-  text-decoration: none;
   background: #fff;
   border-radius: 8px;
   transition: all 0.3s ease;
+  color: inherit;
 }
 
 .patent-item img {

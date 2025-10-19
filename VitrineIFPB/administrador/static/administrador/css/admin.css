@@ -1,12 +1,8 @@
-
-
-/* ADMINISTRADOR */
-
 .admin-main-container {
     display: flex;
     gap: 30px;
     padding: 20px;
-    max-width: 1200px;
+    max-width: 100%;
     margin: auto;
     background-color: #f5f5f5;
     align-items: flex-start;
@@ -52,6 +48,17 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-content-wrapper p {
+    margin: 15px 0 0 0;
+    font-size: 16px;
+    color: #2b2b2bbe;
+}
+
+.admin-content-wrapper p span {
+    font-weight: bold;
+    color: #444;
 }
 
 .admin-section {
@@ -132,7 +139,7 @@
     width: auto;
     margin-right: 5px;
     padding: 6px 12px;
-    font-size: 0.9rem;
+    font-size: 14px;
 }
 
 .admin-table-section .admin-button {
@@ -168,9 +175,6 @@
     position: relative;
     animation: fadeIn 0.5s;
 }
-.modal-content form{
-    margin-top: 15px;
-}
 
 .close-button {
     color: #aaa;
@@ -202,4 +206,26 @@
 
 .delete-button:hover {
     background-color: #c82333;
+}
+
+#campo-busca{
+    width: 30%;
+    padding: 8px;
+    border: none;
+    border-bottom: 1px solid #333;
+    border-radius: 0;
+    outline: none;
+}
+
+
+/* ANIMAÇÕES */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.category-main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
 }

@@ -1,10 +1,9 @@
-function openEditModalCategoria(id, nome, descricao) {
+function openEditModalCategoria(id, nome) {
   const edit_modal = document.getElementById("modal_edit_categoria");
 
   // Altera o valor dos inputs para os dados da Categoria
   document.getElementById("categoria_id_edit").value = id;
   document.getElementById("categoria_nome_edit").value = nome;
-  document.getElementById("categoria_descricao_edit").value = descricao;
 
   edit_modal.style.display = "block";
 }

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'administrador/css/admin.css' %}">
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  {% include 'sidebar_admin.html' %}
+  <div class="content">
+    <h2 class="admin-h2">Campus Cadastrados</h2>
+    <div class="admin-content-wrapper">
+      <form action="">
+        {% csrf_token %}
+        <input type="text" placeholder="Pesquisar projetos:" id="campo-busca">
+      </form>
+      <div class="admin-table-section">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Campus</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for campus in campus %}
+            <tr>
+              <td data-label="id">{{ campus.id }}</td>
+              <td data-label="nome">{{ campus.nome }}</td>
+              <td data-label="Ações" class="admin-actions">
+                <button class="admin-actions-button"onclick="openEditModalCampus('{{ campus.id }}', '{{ campus.nome }}')">Editar</button>
+                <button class="admin-actions-button"onclick="openDeleteModalCampus('{{ campus.id }}', '{{ campus.nome }}')">Excluir</button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <p>Total de campus cadastrados: <span>{{ campus|length }}</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE EDIÇÃO DE CAMPUS -->
+<div id="modal_edit_campus" class="modal">
+  <div class="modal-content">
+    <span class="close-button" onclick="closeModal('modal_edit_campus')">&times;</span>
+    <h2>Editar Campus</h2>
+    <form method="POST" action="{% url 'editar_campus' %}">
+      {% csrf_token %}
+      <input type="hidden" id="campus_id_edit" name="campus_id" value="">
+      <div class="modal-form-group">
+        <label for="campus_nome_edit">Nome do Campus</label>
+        <input type="text" id="campus_nome_edit" name="campus_nome" class="admin-input">
+      </div>
+      <div class="modal-actions">
+        <button type="submit" class="admin-button">Salvar alterações</button>
+        <button type="button" class="admin-button delete-button"onclick="closeModal('modal_edit_campus')">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL DE EXCLUSÃO DE CAMPUS -->
+<div id="modal_delete_campus" class="modal">
+  <div class="modal-content">
+    <span class="close-button" onclick="closeModal('modal_delete_campus')">&times;</span>
+    <h2>Confirmar Exclusão</h2>
+    <p id="delete_message_campus"></p>
+    <form method="POST" action="{% url 'excluir_campus' %}">
+      {% csrf_token %}
+      <input id="campus_id_delete" name="campus_id" type="hidden" value="">
+      <div class="modal-actions">
+        <button type="submit" class="admin-button delete-button">Excluir</button>
+        <button type="button" class="admin-button" onclick="closeModal('modal_delete_campus')">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/pesquisa.js' %}"></script>
+<script src="{% static 'administrador/js/admin.js' %}"></script>
+<script src="{% static 'administrador/js/modal_campus.js' %}"></script>
+{% endblock %}

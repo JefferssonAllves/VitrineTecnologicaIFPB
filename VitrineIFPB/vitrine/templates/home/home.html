@@ -8,10 +8,10 @@
 
 
 {% block content %}
+  <!-- Conteúdo principal -->
   <div class="container">
     {% include 'sidebar.html' %}
-    <!-- Conteúdo principal -->
-    <main class="content">
+    <div class="content">
       <h2>Destaques</h2>
       <div class="grid-projects" id="grid-projects">
         {% for projeto in projetos %}
@@ -26,7 +26,7 @@
           </div>
         {% endfor %}
       </div>
-    </main>
+    </div>
   </div>
 
   <div class="see-more">
@@ -34,6 +34,6 @@
   </div>
 {% endblock %}
 {% block script %}
-  <script src="{% static 'vitrine/js/pesquisa.js' %}"></script>
+  <script src="{% static 'js/pesquisa.js' %}"></script>
   <script src="{% static 'home/js/exibir_pesquisa.js' %}"></script>
 {% endblock %}

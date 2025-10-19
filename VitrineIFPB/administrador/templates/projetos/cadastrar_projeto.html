@@ -2,55 +2,84 @@
 {% load static %}
 
 {% block head %}
-  <link rel="stylesheet" href="{% static 'administrador/css/admin.css' %}">
+<link rel="stylesheet" href="{% static 'administrador/css/admin.css' %}">
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
 {% endblock %}
 {% block content %}
-<main class="admin-main-container">
+<div class="container">
   {% include 'sidebar_admin.html' %}
-  <div class="admin-content-wrapper">
-    <section id="cadastrar-projeto-section">
-      <h2 class="admin-h2">Cadastrar Novo Projeto</h2>
-      <div class="admin-form-section">
-        <form method="POST" action="{% url 'cadastrar_projeto' %}" enctype="multipart/form-data">
-          {% csrf_token %}
-          <div class="admin-form-group">
-            <label for="imagem-projeto">Imagem do Projeto</label>
-            <input type="file" id="imagem-projeto" name="projeto_imagem" accept="image/*">
-          </div>
-          <div class="admin-form-group">
-            <label for="projeto-titulo">Título</label>
-            <input type="text" id="projeto-titulo" placeholder="Digite o título do projeto" name="projeto_titulo" class="admin-input">
-          </div>
-          <div class="admin-form-group">
-            <label for="projeto-desc">Descrição</label>
-            <textarea id="projeto-desc" rows="3" placeholder="Descrição do projeto" name="projeto_descricao" class="admin-input"></textarea>
-          </div>
-          <div class="admin-form-group">
-            <label for="projeto-autores">Autores</label>
-            <input type="text" id="projeto-autores" placeholder="Nome dos autores" name="projeto_autores" class="admin-input">
-          </div>
-          <div class="admin-form-group">
-            <label for="projeto-categoria">Categoria</label>
-            <select id="projeto-categoria" name="projeto_categoria" class="admin-input">
-              <option value="">Selecione a Categoria</option>
-              <option value="patente">Patente</option>
-              <option value="software">Software</option>
-            </select>
-          </div>
-          <div class="admin-form-group">
-            <label for="projeto_areas">Área do Conhecimento</label>
-            <select id="projeto_areas" name="projeto_areas" class="admin-input" multiple>
-              {% for categoria in categorias %}
-                <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
-              {% endfor %}
-            </select>
-          </div>
-          <button type="submit" class="admin-button">Cadastrar Projeto</button>
-        </form>
-      </div>
-    </section>
+  <div class="content">
+    <h2 class="admin-h2">Cadastrar Novo Projeto</h2>
+    <div class="admin-content-wrapper">
+      <section id="cadastrar-projeto-section">
+        <div class="admin-form-section">
+          <form method="POST" action="{% url 'cadastrar_projeto' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="admin-form-group">
+              <label for="imagem-projeto">Imagem do Projeto</label>
+              <input type="file" id="imagem-projeto" name="projeto_imagem" accept="image/*">
+            </div>
+            <div class="admin-form-group">
+              <label for="projeto-titulo">Título</label>
+              <input type="text" id="projeto-titulo" placeholder="Digite o título do projeto" name="projeto_titulo" class="admin-input">
+            </div>
+            <div class="admin-form-group">
+              <label for="projeto-campus">Campus do projeto</label>
+              <select id="projeto-campus" name="projeto_campus" class="admin-input" multiple>
+                {% for campus in campus %}
+                  <option value="{{ campus.id }}">{{ campus.nome }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="admin-form-group">
+              <label for="projeto-servidor">Servidor solicitante</label>
+              <input type="text" id="projeto-servidor" placeholder="Nome dos autores" name="projeto_servidor" class="admin-input">
+            </div>
+            <div class="admin-form-group">
+              <label for="projeto-desc">Descrição</label>
+              <textarea id="projeto-desc" rows="3" placeholder="Descrição do projeto" name="projeto_descricao" class="admin-input"></textarea>
+            </div>
+            <div class="admin-form-group">
+              <label for="projeto-autores">Setor de lotação</label>
+              <input type="text" id="projeto-autores" placeholder="Nome dos autores" name="projeto_setor" class="admin-input">
+            </div>
+            <div class="admin-form-group">
+              <label for="projeto-ano">Ano de depósito</label>
+              <input type="text" id="projeto-ano" placeholder="Ano de depósito" name="projeto_ano" class="admin-input">
+            </div>
+            <div class="admin-form-group">
+              <label for="projeto-categorias">Categoria do projeto</label>
+              <select id="projeto-categorias" name="projeto_categorias" class="admin-input" multiple>
+                {% for categoria in categorias %}
+                  <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="admin-form-group">
+              <label for="projeto-suap">Link do Suap</label>
+              <input type="text" id="projeto-suap" placeholder="Link do Suap" name="projeto_suap" class="admin-input">
+            </div>
+            <div class="admin-form-group">
+              <label for="imagem-certificado">Certificado</label>
+              <input type="file" id="imagem-certificado" name="projeto_certificado" accept=".pdf">
+            </div>
+            <div class="admin-form-group">
+              <label for="projeto-status">Status</label>
+              <input type="text" id="projeto-status" placeholder="Status do projeto" name="projeto_status" class="admin-input">
+            </div>
+              <div class="admin-form-group">
+                <label for="projeto-observacoes">Observações de Tramitação</label>
+                <input type="text" id="projeto-observacoes" placeholder="Observações de Tramitação" name="projeto_observacoes" class="admin-input">
+              </div>
+            <button type="submit" class="admin-button">Cadastrar Projeto</button>
+          </form>
+        </div>
+      </section>
+    </div>
   </div>
-</main>
+</div>
+
 {% endblock %}
 {% block script %}
 <script src="{% static 'administrador/js/admin.js' %}"></script>

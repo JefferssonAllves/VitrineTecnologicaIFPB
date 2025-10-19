@@ -2,8 +2,7 @@
 function closeModal(modal) {
   document.getElementById(modal).style.display = "none";
 }
+function carregandoResultados() {
+  console.log("Carregando resultados...");
+}
 
-
-url = window.location.href.split('/').filter(string => string !== "");
-url = url[url.length - 1];
-document.getElementById(url).classList.add("active");

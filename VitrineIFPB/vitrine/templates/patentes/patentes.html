@@ -7,9 +7,10 @@
 {% endblock %}
 
 {% block content %}
+
   <div class="container">
     {% include 'sidebar.html' %}
-    <main class="content">
+    <div class="content">
       <h2>Todas as Patentes</h2>
       <div id="patent-list">
         {% for projeto in projetos %}
@@ -17,8 +18,8 @@
             <img src="{{ projeto.imagem.url }}" alt="Imagem da patente">
             <div class="patent-info">
               <div class="tags-container">
-                {% for area_conhecimento in projeto.areas_conhecimento.all %}
-                  <span class="tags">{{ area_conhecimento.nome }}</span>
+                {% for categoria in projeto.categorias.all %}
+                  <span class="tags">{{ categoria.nome }}</span>
                 {% endfor %}
                 </div>
               <h3 class="patent-title">{{ projeto.titulo }}</h3>
@@ -26,11 +27,12 @@
           </a>
         {% endfor %}
       </div>
-    </main>
-
+    </div>
   </div>
+
+
 {% endblock %}
 {% block script %}
-<script src="{% static 'vitrine/js/pesquisa.js' %}"></script>
+<script src="{% static 'js/pesquisa.js' %}"></script>
 <script src="{% static 'patentes/js/exibir_pesquisa.js' %}"></script>
 {% endblock %}

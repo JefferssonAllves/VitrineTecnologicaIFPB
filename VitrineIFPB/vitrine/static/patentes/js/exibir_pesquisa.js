@@ -14,7 +14,7 @@ function exibirResultados(projetos) {
       <img src="${projeto.imagem_url}" alt="${projeto.titulo}" class="patent-image">
       <div class="patent-info">
         <div class="tags-container">
-          ${projeto.areas_conhecimento.map(area => `<span class="tags">${area}</span>`).join('')}
+          ${projeto.categorias.map(categoria => `<span class="tags">${categoria}</span>`).join('')}
         </div>
         <h3 class="patent-title">${projeto.titulo}</h3>
       </div>
