@@ -1,7 +1,8 @@
-function exibirResultados(projetos) {
+function exibirResultados(data) {
   const corpoTabela = document.getElementById("corpo-tabela");
   const editIconUrl = corpoTabela.dataset.editIcon;
   const deleteIconUrl = corpoTabela.dataset.deleteIcon;
+  projetos = data.projetos;
 
   corpoTabela.innerHTML = "";
 

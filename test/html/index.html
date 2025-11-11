@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualizar PDF em Modal</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Conteúdo normal da página */
+    .page-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Botão para abrir modal */
+    .btn-abrir-pdf {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+      margin: 10px 0;
+    }
+
+    .btn-abrir-pdf:hover {
+      background: #0056b3;
+    }
+
+    /* Modal sobre a página */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* Container do modal - AJUSTADO */
+    .modal-container {
+      background: white;
+      width: auto;
+      height: auto;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: modalAppear 0.3s ease-out;
+      border-radius: 10px;
+    }
+
+    @keyframes modalAppear {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Cabeçalho minimalista */
+    .modal-header {
+      display: flex;
+      justify-content: flex-end;
+      padding: 15px 20px;
+      background: #f8f9fa;
+      border-radius: 10px 10px 0 0;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    .btn-fechar {
+      background: #6c757d;
+      color: white;
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    .btn-fechar:hover {
+      background: #5a6268;
+    }
+
+    /* Corpo do modal - PDF ocupa todo o espaço */
+    .modal-body {
+      flex: 1;
+      padding: 0;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .pdf-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 0 0 10px 10px;
+      min-width: 300px;
+      min-height: 400px;
+    }
+
+    /* Estado quando modal está aberto */
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    /* Loading state */
+    .pdf-loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #666;
+      font-size: 16px;
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      .modal-container {
+        width: 95vw;
+        height: auto;
+        max-height: 90vh;
+      }
+
+      .modal-header {
+        padding: 10px 15px;
+      }
+
+      .pdf-iframe {
+        min-width: 250px;
+        min-height: 350px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="page-content">
+      <h1>Minha Página Normal</h1>
+      <p>Este é o conteúdo normal da sua página. Quando você clicar no botão abaixo, o PDF abrirá em um modal sobre esta
+        página.</p>
+
+      <button class="btn-abrir-pdf" onclick="abrirModal()">
+        📄 Visualizar PDF no Modal
+      </button>
+
+      <p>Mais conteúdo da página aqui...</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua.</p>
+    </div>
+  </div>
+
+  <!-- Modal que aparece sobre a página -->
+  <div class="modal-overlay" id="pdfModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <button class="btn-fechar" onclick="fecharModal()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="pdf-loading" id="pdfLoading">Carregando PDF...</div>
+        <iframe id="pdfIframe"
+          src="../../VitrineIFPB/media/projetos/certificados/REQUERIMENTO_-_JOAO_DIAS.pdf#view=FitV&toolbar=0&navpanes=0&scrollbar=0"
+          class="pdf-iframe" onload="document.getElementById('pdfLoading').style.display = 'none'"
+          onerror="document.getElementById('pdfLoading').textContent = 'Erro ao carregar PDF'" frameborder="0"
+          allow="fullscreen">
+          <p>Seu navegador não suporta a visualização de PDF.
+            <a href="../../VitrineIFPB/media/projetos/certificados/REQUERIMENTO_-_JOAO_DIAS.pdf" download>
+              Clique aqui para baixar o PDF
+            </a>
+          </p>
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function abrirModal() {
+      const modal = document.getElementById('pdfModal');
+      const loading = document.getElementById('pdfLoading');
+
+      // Mostrar loading
+      loading.style.display = 'block';
+      loading.textContent = 'Carregando PDF...';
+
+      modal.style.display = 'flex';
+      document.body.classList.add('modal-open');
+
+      // Foca no iframe para permitir controles do PDF
+      setTimeout(() => {
+        document.getElementById('pdfIframe').focus();
+      }, 100);
+    }
+
+    function fecharModal() {
+      const modal = document.getElementById('pdfModal');
+      const iframe = document.getElementById('pdfIframe');
+
+      modal.style.display = 'none';
+      document.body.classList.remove('modal-open');
+
+      // Opcional: limpar o iframe para liberar memória
+      // iframe.src = '';
+    }
+
+    // Fechar modal com ESC
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        fecharModal();
+      }
+    });
+
+    // Fechar clicando no overlay (fora do modal)
+    document.getElementById('pdfModal').addEventListener('click', function (e) {
+      if (e.target === this) {
+        fecharModal();
+      }
+    });
+
+    // Prevenir que clicks dentro do modal fechem
+    document.querySelector('.modal-container').addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
+  </script>
+</body>
+
+</html>

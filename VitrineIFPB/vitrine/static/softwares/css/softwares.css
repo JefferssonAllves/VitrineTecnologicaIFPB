@@ -8,7 +8,7 @@
 
 .software-item {
   display: flex;
-  background: #bb000000;
+  background: #fffffffa;
   align-items: flex-start;
   margin-bottom: 30px;
   padding: 15px;
@@ -18,7 +18,8 @@
 }
 
 .software-item:hover {
-  background: #fff;
+  background: #fafafa;
+
   transform: translateX(5px);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }

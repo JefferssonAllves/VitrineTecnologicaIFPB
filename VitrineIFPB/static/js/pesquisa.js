@@ -1,7 +1,6 @@
 let timeoutBusca = null;
 
-function realizarBusca(termo) {
-  const urlBusca = "/vitrine/buscar_projetos/";
+function realizarBusca(termo, urlBusca) {
   carregandoResultados();
   clearTimeout(timeoutBusca);
 
@@ -21,13 +20,10 @@ function realizarBusca(termo) {
       });
 
       const data = await response.json();
-      console.log("Resposta recebida:", data);
-      exibirResultados(data.projetos);
+      exibirResultados(data);
 
     } catch (error) {
       console.error("Erro:", error);
-    } finally {
-      console.log("Busca finalizada");
     }
   }, 500);
 }
@@ -35,11 +31,12 @@ function realizarBusca(termo) {
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
   const inputBusca = document.getElementById('campo-busca');
+  const urlBusca = document.getElementById('url-busca').value;
 
   if (inputBusca) {
     inputBusca.addEventListener('input', function(e) {
       const termo = e.target.value.trim();
-      realizarBusca(termo);
+      realizarBusca(termo, urlBusca);
     });
     // realizarBusca('');
   }

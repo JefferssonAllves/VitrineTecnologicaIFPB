@@ -14,6 +14,7 @@
     <div class="admin-content-wrapper">
       <form action="{% url 'buscar_projetos' %}" method="GET">
         {% csrf_token %}
+        <input type="hidden" id="url-busca" value="{% url 'buscar_projetos' %}">
         <input type="text" placeholder="Pesquisar projetos:" id="campo-busca">
       </form>
       <table class="admin-table">

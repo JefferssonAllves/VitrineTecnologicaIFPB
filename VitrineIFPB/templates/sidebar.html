@@ -4,6 +4,7 @@
   <div class="box">
     <h3>Pesquisar</h3>
     {% csrf_token %}
+    <input type="hidden" id="url-busca" value="{% url 'buscar_projetos' %}">
     <input type="text" placeholder="Pesquisar por:" id="campo-busca">
   </div>
 

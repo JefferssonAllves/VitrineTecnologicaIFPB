@@ -15,7 +15,8 @@
     <div class="admin-content-wrapper">
       <form action="">
         {% csrf_token %}
-        <input type="text" placeholder="Pesquisar projetos:" id="campo-busca">
+        <input type="hidden" id="url-busca" value="{% url 'buscar_categorias' %}">
+        <input type="text" placeholder="Pesquisar categorias:" id="campo-busca">
       </form>
       <div class="admin-table-section">
         <table class="admin-table">
@@ -26,7 +27,7 @@
               <th>Ações</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="corpo-tabela" data-edit-icon="{% static 'administrador/icons/edit.png' %}" data-delete-icon="{% static 'administrador/icons/delete.png' %}">
             {% for categoria in categorias %}
             <tr>
               <td data-label="id">{{ categoria.id }}</td>
@@ -86,4 +87,6 @@
 {% block script %}
 <script src="{% static 'administrador/js/admin.js' %}"></script>
 <script src="{% static 'administrador/js/modal_categorias.js' %}"></script>
+<script src="{% static 'administrador/js/categorias.js' %}"></script>
+<script src="{% static 'js/pesquisa.js' %}"></script>
 {% endblock %}

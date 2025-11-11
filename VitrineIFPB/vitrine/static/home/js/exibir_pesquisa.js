@@ -1,5 +1,7 @@
-function exibirResultados(projetos) {
+function exibirResultados(data) {
   const container = document.getElementById('grid-projects');
+  projetos = data.projetos;
+
 
   if (!projetos || projetos.length === 0) {
     container.innerHTML = `
