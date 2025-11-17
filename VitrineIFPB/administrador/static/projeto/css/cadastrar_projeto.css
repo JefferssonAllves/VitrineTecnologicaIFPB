@@ -26,7 +26,8 @@
   border: 1px solid #ccc;
 }
 
-.custom-file-upload {
+.custom-input {
+  background: none;
   margin-top: 10px;
   padding: 8px;
   border-radius: 5px;
@@ -35,33 +36,55 @@
   font-size: 13px;
   cursor: pointer;
   display: flex;
+  height: 39px;
   justify-content: space-between;
+  align-items: center;
 }
 
-.custom-file-upload img {
+.custom-input img {
   width: 20px;
   height: 20px;
 }
+
 
 .projeto-arquivo {
   display: none;
 }
 
-.projeto-select {
-  margin-top: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  cursor: pointer;
-}
-
-.projeto-select option {
-  font-size: 15px;
-  margin: 5px 0px 0px 15px;
-}
-
-.projeto-select::-webkit-scrollbar {
+.modal-categorias{
   display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 370px;
+  width: 389px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  overflow-y: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  gap: 8px;
 }
+
+.modal-categorias label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.projeto-checkbox {
+  width: 15px;
+  height: 15px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+}
+
 
 .tab {
   display: none;

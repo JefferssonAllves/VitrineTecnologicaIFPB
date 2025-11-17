@@ -65,6 +65,7 @@ def cadastrar_projeto(request):
                       observacoes=observacoes
                     )
     projeto.save()
+    print(categorias)
     for categoria in categorias:
       projeto.categorias.add(Categoria.objects.get(id=int(categoria)))
   else:

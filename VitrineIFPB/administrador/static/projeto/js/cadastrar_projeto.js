@@ -55,9 +55,48 @@ document.addEventListener("DOMContentLoaded", function () {
 function atualizarLabel(input){
   const nome = input.value.replace(/^.*[\\\/]/, '');
   const id = input.id;
-  
+
   label = document.getElementsByClassName(id);
   caminho_imagem_label = document.getElementById('caminho_icone').value;
   label[0].textContent = nome;
   label[0].appendChild(document.createElement("img")).src = caminho_imagem_label;
 }
+
+document.getElementById('abrir-modal-categorias').addEventListener('click', function() {
+  const modal = document.querySelector('.modal-categorias');
+  if (modal.style.display === "none" || modal.style.display === "") {
+    modal.style.display = "flex";
+  } else {
+    modal.style.display = "none";
+  }
+});
+
+document.addEventListener('click', function(event) {
+  const modal = document.querySelector('.modal-categorias');
+  const button = document.getElementById('abrir-modal-categorias');
+
+  if (!modal.contains(event.target) && !button.contains(event.target)) {
+    modal.style.display = 'none';
+  }
+});
+
+function atualizarCategoriasSelecionadas() {
+  const checkboxes = document.querySelectorAll('.projeto-checkbox');
+  const categoriasSelecionadas = [];
+  checkboxes.forEach(checkbox => {
+    if (checkbox.checked) {
+      categoriasSelecionadas.push(checkbox.name);
+    }
+  });
+  if (categoriasSelecionadas.length === 0) {
+    categoriasSelecionadas.push('Selecione as categorias que o projeto se encaixa');
+  }
+  document.getElementById('abrir-modal-categorias').textContent = categoriasSelecionadas.join(', ');
+  document.getElementById('abrir-modal-categorias').appendChild(document.createElement("img")).src = document.getElementById('caminho_icone_seta').value;
+
+}
+
+const checkboxes = document.querySelectorAll('.projeto-checkbox');
+checkboxes.forEach(checkbox => {
+  checkbox.addEventListener('change', atualizarCategoriasSelecionadas);
+});

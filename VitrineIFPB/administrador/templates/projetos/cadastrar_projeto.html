@@ -20,7 +20,7 @@
           <div class="row-6">
             <div class="form-group">
                 <label for="projeto_imagem">Imagem</label>
-                <label for="projeto_imagem" class="custom-file-upload projeto_imagem">
+                <label for="projeto_imagem" class="custom-input projeto_imagem">
                   Selecionar Imagem
                   <img src="{% static  'projeto/img/upload.png' %}" alt="">
                 </label>
@@ -60,12 +60,17 @@
         <div class="tab" id="tab2">
           <div class="row-6">
             <div class="form-group">
-              <label for="projeto_categoria">Categoria</label>
-              <select class="projeto-input" name="projeto_categoria" id="projeto_categoria" required>
-                {% for categoria in categorias %}
-                  <option value="{{ categoria }}">{{ categoria }}</option>
-                {% endfor %}
-              </select>
+              <label for="projeto_categorias">Categoria</label>
+              <input type="hidden" id="caminho_icone_seta" value="{% static 'projeto/img/seta-baixo.png' %}">
+              <button type="button" id="abrir-modal-categorias" class="custom-input">Selecione as categorias que o projeto se encaixa<img src="{% static 'projeto/img/seta-baixo.png' %}" alt=""></button>
+            </div>
+            <div class="modal-categorias">
+              {% for categoria in categorias %}
+                <label for="{{ categoria.nome }}">
+                  <input type="checkbox" value="{{ categoria.id }}" id="{{ categoria.nome }}" name="{{ categoria.nome }}" class="projeto-checkbox">
+                  {{ categoria }}
+                </label>
+              {% endfor %}
             </div>
             <div class="form-group">
               <label for="projeto_setor">Setor</label>
@@ -87,7 +92,7 @@
             </div>
             <div class="form-group">
               <label for="projeto_certificado">Certificado</label>
-              <label for="projeto_certificado" class="custom-file-upload projeto_certificado">
+              <label for="projeto_certificado" class="custom-input projeto_certificado">
                 Selecionar Certificado
                 <img src="{% static 'projeto/img/upload.png' %}" alt="">
               </label>
