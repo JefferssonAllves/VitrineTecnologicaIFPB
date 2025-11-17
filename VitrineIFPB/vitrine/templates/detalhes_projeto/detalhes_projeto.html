@@ -25,10 +25,20 @@
   </section>
 
   <section class="projeto-section">
-    <h2>Inventores</h2>
+    <h2>Ano de depósito</h2>
     <p>
-      {{ projeto.autores }}
+      {{ projeto.ano_deposito }}
     </p>
   </section>
+
+  <section class="gerar-certificado projeto-section">
+    <button class="botao-certificado" onclick="mostrarModal()">Gerar Certificado</button>
+    <div class="modal-certificado" id="modal_certificado" onclick="mostrarModal()">
+      <iframe class="pdf-frame" src="{{ projeto.certificado.url }}#toolbar=0&navpanes=0&scrollbar=0&statusbar=0&messages=0" type="application/pdf"></iframe>
+    </div>
+  </section>
 </div>
+{% endblock %}
+{% block script %}
+<script src="{% static 'detalhes_projeto/js/detalhes_projeto.js' %}"></script>
 {% endblock %}

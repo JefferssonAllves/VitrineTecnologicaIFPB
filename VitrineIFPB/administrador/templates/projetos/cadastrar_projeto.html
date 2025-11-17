@@ -4,6 +4,7 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'administrador/css/admin.css' %}">
 <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+<link rel="stylesheet" href="{% static 'projeto/css/cadastrar_projeto.css' %}">
 
 {% endblock %}
 {% block content %}
@@ -12,75 +13,106 @@
   <div class="content">
     <h2 class="admin-h2">Cadastrar Novo Projeto</h2>
     <div class="admin-content-wrapper">
-      <section id="cadastrar-projeto-section">
-        <div class="admin-form-section">
-          <form method="POST" action="{% url 'cadastrar_projeto' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="admin-form-group">
-              <label for="imagem-projeto">Imagem do Projeto</label>
-              <input type="file" id="imagem-projeto" name="projeto_imagem" accept="image/*">
+      <form id="multiStepForm" action="{% url 'cadastrar_projeto' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Aba 1 -->
+        <div class="tab active" id="tab1">
+          <div class="row-6">
+            <div class="form-group">
+                <label for="projeto_imagem">Imagem</label>
+                <label for="projeto_imagem" class="custom-file-upload projeto_imagem">
+                  Selecionar Imagem
+                  <img src="{% static 'projeto/img/upload.png' %}" alt="">
+                </label>
+                <input type="hidden" id="caminho_icone" value="{% static 'projeto/img/upload.png' %}">
+                <input type="file" onchange="atualizarLabel(this)" id="projeto_imagem" class="projeto-arquivo" name="projeto_imagem" accept="image/*" required>
             </div>
-            <div class="admin-form-group">
-              <label for="projeto-titulo">Título</label>
-              <input type="text" id="projeto-titulo" placeholder="Digite o título do projeto" name="projeto_titulo" class="admin-input">
+            <div class="form-group">
+                <label for="projeto_titulo">Titulo</label>
+                <input type="text" id="titulo" name="projeto_titulo" class="projeto-input" placeholder="Digite o título do projeto" required>
             </div>
-            <div class="admin-form-group">
-              <label for="projeto-campus">Campus do projeto</label>
-              <select id="projeto-campus" name="projeto_campus" class="admin-input" multiple>
+          </div>
+          <div class="form-group">
+            <label for="projeto_descricao">Descrição</label>
+            <textarea rows="3" placeholder="Adicione uma descrição do projeto" name="projeto_descricao" class="projeto-input"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="projeto_servidor">Servidor Solicitante</label>
+            <input type="text" id="projeto_servidor" name="projeto_servidor" class="projeto-input" placeholder="Digite o nome do servidor solicitante" required>
+          </div>
+          <div class="row-6">
+            <div class="form-group">
+              <label for="projeto_campus">Campus</label>
+              <select class="projeto-input" name="projeto_campus" id="projeto_campus" required>
                 {% for campus in campus %}
                   <option value="{{ campus.id }}">{{ campus.nome }}</option>
                 {% endfor %}
               </select>
             </div>
-            <div class="admin-form-group">
-              <label for="projeto-servidor">Servidor solicitante</label>
-              <input type="text" id="projeto-servidor" placeholder="Nome dos autores" name="projeto_servidor" class="admin-input">
+            <div class="form-group">
+              <label for="projeto_ano">Ano de Depósito</label>
+              <input type="number" id="projeto_ano" name="projeto_ano" class="projeto-input" placeholder="Digite o ano de depósito" required>
             </div>
-            <div class="admin-form-group">
-              <label for="projeto-desc">Descrição</label>
-              <textarea id="projeto-desc" rows="3" placeholder="Descrição do projeto" name="projeto_descricao" class="admin-input"></textarea>
-            </div>
-            <div class="admin-form-group">
-              <label for="projeto-autores">Setor de lotação</label>
-              <input type="text" id="projeto-autores" placeholder="Nome dos autores" name="projeto_setor" class="admin-input">
-            </div>
-            <div class="admin-form-group">
-              <label for="projeto-ano">Ano de depósito</label>
-              <input type="text" id="projeto-ano" placeholder="Ano de depósito" name="projeto_ano" class="admin-input">
-            </div>
-            <div class="admin-form-group">
-              <label for="projeto-categorias">Categoria do projeto</label>
-              <select id="projeto-categorias" name="projeto_categorias" class="admin-input" multiple>
+          </div>
+        </div>
+
+        <!-- Aba 2 -->
+        <div class="tab" id="tab2">
+          <div class="row-6">
+            <div class="form-group">
+              <label for="projeto_categoria">Categoria</label>
+              <select class="projeto-input" name="projeto_categoria" id="projeto_categoria" required>
                 {% for categoria in categorias %}
-                  <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                  <option value="{{ categoria }}">{{ categoria }}</option>
                 {% endfor %}
               </select>
             </div>
-            <div class="admin-form-group">
-              <label for="projeto-suap">Link do Suap</label>
-              <input type="text" id="projeto-suap" placeholder="Link do Suap" name="projeto_suap" class="admin-input">
+            <div class="form-group">
+              <label for="projeto_setor">Setor</label>
+              <input type="text" id="projeto_setor" name="projeto_setor" class="projeto-input" placeholder="Digite o setor do projeto" required>
             </div>
-            <div class="admin-form-group">
-              <label for="imagem-certificado">Certificado</label>
-              <input type="file" id="imagem-certificado" name="projeto_certificado" accept=".pdf">
+          </div>
+          <div class="form-group">
+            <label for="projeto_link">Link do projeto no SUAP</label>
+            <input type="text" id="projeto_link" name="projeto_link" class="projeto-input" placeholder="Digite o link do projeto no SUAP" required>
+          </div>
+          <div class="row-6">
+            <div class="form-group">
+              <label for="projeto_status">Status</label>
+              <select class="projeto-input" name="projeto_status" id="projeto_status" required>
+                {% for status in projeto_status %}
+                  <option value="{{ status }}">{{ status }}</option>
+                {% endfor %}
+              </select>
             </div>
-            <div class="admin-form-group">
-              <label for="projeto-status">Status</label>
-              <input type="text" id="projeto-status" placeholder="Status do projeto" name="projeto_status" class="admin-input">
+            <div class="form-group">
+              <label for="projeto_certificado">Certificado</label>
+              <label for="projeto_certificado" class="custom-file-upload projeto_certificado">
+                Selecionar Certificado
+                <img src="{% static 'projeto/img/upload.png' %}" alt="">
+              </label>
+              <input type="hidden" id="caminho_icone" value="{% static 'projeto/img/upload.png' %}">
+              <input type="file" onchange="atualizarLabel(this)" id="projeto_certificado" class="projeto-arquivo" name="projeto_certificado" required>
             </div>
-              <div class="admin-form-group">
-                <label for="projeto-observacoes">Observações de Tramitação</label>
-                <input type="text" id="projeto-observacoes" placeholder="Observações de Tramitação" name="projeto_observacoes" class="admin-input">
-              </div>
-            <button type="submit" class="admin-button">Cadastrar Projeto</button>
-          </form>
+          </div>
+          <div class="form-group">
+            <label for="projeto_observacoes">Observações</label>
+            <textarea rows="3" placeholder="Adicione observações sobre o projeto" name="projeto_observacoes" class="projeto-input"></textarea>
+
+          </div>
         </div>
-      </section>
+        <!-- Botões de Navegação -->
+        <div class="navigation-buttons">
+            <button type="button" id="prevBtn">Voltar</button>
+            <button type="button" id="nextBtn">Próximo</button>
+            <button type="submit" id="submitBtn" style="display: none;">Enviar</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
 
 {% endblock %}
 {% block script %}
-<script src="{% static 'administrador/js/admin.js' %}"></script>
+<script src="{% static 'projeto/js/cadastrar_projeto.js' %}"></script>
 {% endblock %}

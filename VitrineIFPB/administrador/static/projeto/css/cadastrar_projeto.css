@@ -1,0 +1,107 @@
+.row-6 {
+  display: flex;
+  flex-direction: row;
+  gap: 4%;
+}
+.row-6 > .form-group{
+  width: 48%;
+}
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+#multiStepForm{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.projeto-input {
+  margin-top: 10px;
+  padding: 11px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.custom-file-upload {
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  color: #6b6b6b;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.custom-file-upload img {
+  width: 20px;
+  height: 20px;
+}
+
+.projeto-arquivo {
+  display: none;
+}
+
+.projeto-select {
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.projeto-select option {
+  font-size: 15px;
+  margin: 5px 0px 0px 15px;
+}
+
+.projeto-select::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+.tab.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.navigation-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+#nextBtn, #submitBtn {
+  margin-left: auto;
+}
+
+#nextBtn, #prevBtn, #submitBtn {
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#nextBtn, #submitBtn {
+  background-color: #4CAF50;
+}
+
+#prevBtn {
+  background-color: #df6860;
+}

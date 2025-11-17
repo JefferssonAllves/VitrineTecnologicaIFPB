@@ -34,7 +34,7 @@ def cadastrar_admin(request):
 
 #TODO CONTROLE DE PROJETOS
 def projetos(request):
-  return render(request, 'projetos/projetos.html', {'projetos':Projeto.objects.all(), 'categorias':Categoria.objects.all()})
+  return render(request, 'projetos/projetos.html', {'Projeto': Projeto, 'projetos':Projeto.objects.all(), 'categorias':Categoria.objects.all()})
 
 def cadastrar_projeto(request):
   if request.method == 'POST':
@@ -68,7 +68,7 @@ def cadastrar_projeto(request):
     for categoria in categorias:
       projeto.categorias.add(Categoria.objects.get(id=int(categoria)))
   else:
-    return render(request, 'projetos/cadastrar_projeto.html', {'categorias':Categoria.objects.all(), 'campus': Campus.objects.all()})
+    return render(request, 'projetos/cadastrar_projeto.html', {'categorias':Categoria.objects.all(), 'campus': Campus.objects.all(), 'projeto_status': Projeto.STATUS_CHOICES})
   return redirect('projetos')
 
 def editar_projeto(request):

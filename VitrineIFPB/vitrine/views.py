@@ -8,6 +8,7 @@ from django.db.models import Q
 
 
 def home(request):
+  print(Projeto.objects.all().count())
   return render(request, 'home/home.html', {'projetos': filtrar_projetos(request), 'categorias': Categoria.objects.all(), 'campus': Campus.objects.all()})
 
 def patentes(request):
@@ -31,9 +32,6 @@ def filtrar_projetos(request):
   elif campus_id:
     return Projeto.objects.filter(campus__id=campus_id)
   return Projeto.objects.all()
-
-
-
 
 #FUNCAO PARA BUSCAR PROJETOS ATRAVES DA BARRA DE PESQUISA
 def buscar_projetos(request):
@@ -73,7 +71,7 @@ def buscar_categorias(request):
   if request.method == 'POST':
     body = json.loads(request.body)
     termo = body['termo']
-    
+
     if not termo:
       categorias = Categoria.objects.all()
     else:

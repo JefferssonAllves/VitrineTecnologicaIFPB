@@ -8,16 +8,6 @@
     align-items: flex-start;
 }
 
-.admin-sidebar {
-    width: 250px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
 
 .admin-sidebar-button {
     width: 100%;
@@ -48,6 +38,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    min-height: 450px;
 }
 
 .admin-content-wrapper p {
@@ -74,6 +65,7 @@
     margin-bottom: 40px;
     padding-bottom: 20px;
     border-bottom: 1px solid #eee;
+    height: 100%;
 }
 
 .admin-table-section {
@@ -87,7 +79,10 @@
 }
 
 .admin-form-group {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 15px;
+    gap: 10px;
 }
 
 .admin-input,
@@ -129,6 +124,7 @@
     border: 1px solid #ddd;
     padding: 10px;
     text-align: left;
+    font-size: 15px;
 }
 
 .admin-table th {
@@ -148,6 +144,12 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.botao{
+    background-color: #00000000;
+    border: none;
+    cursor: pointer;
 }
 
 /* MODAIS */
@@ -207,9 +209,34 @@
 .delete-button:hover {
     background-color: #c82333;
 }
+.status{
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 5px;
+}
+.concluido{background-color: #33cc14b0;}
+.em-andamento{background-color: #ffc107ab;}
+.parado{background-color: #d61427c0;}
 
+.category-main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+
+
+
+
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
 #campo-busca{
-    width: 30%;
+    width: 40%;
     padding: 8px;
     border: none;
     border-bottom: 1px solid #333;
@@ -222,10 +249,4 @@
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-.category-main {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 0 20px;
 }

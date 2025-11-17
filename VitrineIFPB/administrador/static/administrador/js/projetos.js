@@ -25,10 +25,7 @@ function exibirResultados(data) {
       <td data-label="Ano do depósito">${projeto.ano_deposito}</td>
       <td data-label="Status">${projeto.status}</td>
       <td data-label="Observações de Tramitação">${projeto.observacoes}</td>
-      <td data-label="Ações" class="admin-actions">
-        <a href=""><img src="${editIconUrl}" alt="" width="24" height="24"></a>
-        <a href=""><img src="${deleteIconUrl}" alt="" width="24" height="24"></a>
-      </td>
+      <td data-label="Ações" class="admin-actions">Editar</td>
     `;
 
     corpoTabela.appendChild(linha);

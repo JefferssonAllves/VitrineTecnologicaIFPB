@@ -19,8 +19,7 @@
             {% csrf_token %}
             <div class="admin-form-group">
               <label for="campus-nome">Nome do Campus</label>
-              <input type="text" id="campus-nome" name="campus_nome" placeholder="Digite o nome do campus"
-                class="admin-input">
+              <input type="text" id="campus-nome" name="campus_nome" placeholder="Digite o nome do campus" class="admin-input" required>
             </div>
             <button type="submit" class="admin-button">Cadastrar Campus</button>
           </form>

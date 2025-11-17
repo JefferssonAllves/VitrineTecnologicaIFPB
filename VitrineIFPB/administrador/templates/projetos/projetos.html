@@ -36,17 +36,21 @@
             <td data-label="Título">{{ projeto.titulo }}</td>
             <td data-label="Setor de Lotação">{{ projeto.setor_lotacao }}</td>
             <td data-label="Ano do depósito">{{ projeto.ano_deposito }}</td>
-            <td data-label="Status">{{ projeto.status }}</td>
+            <td data-label="Status">
+              <span {% if projeto.status == 'Concluído' %}class="status concluido"{% elif projeto.status == 'Em Andamento' %}class="status em-andamento"{% elif projeto.status == 'Parado' %}class="status parado"{% endif %}>
+                {{ projeto.status }}
+              </span>
+              </td>
             <td data-label="Observações de Tramitação">{{ projeto.observacoes }}</td>
-            <td data-label="Ações" class="admin-actions">
-              <a href=""><img src="{% static 'administrador/icons/edit.png' %}" alt="" width="24" height="24"></a>
-              <a href=""><img src="{% static 'administrador/icons/delete.png' %}" alt="" width="26" height="26"></a>
-            </td>
+            <td data-label="Ações" class="admin-actions">Editar</td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
-      <p>Total de projetos cadastrados: <span>{{ projetos|length }}</span></p>
+      <p>Total de projetos cadastrados: <span>{{ Projeto.quantidade_projetos }}</span></p>
+      <p>Total de projetos concluidos: <span>{{ Projeto.get_projetos_concluidos }}</span></p>
+      <p>Total de projetos em andamento: <span>{{ Projeto.get_projetos_em_andamento }}</span></p>
+      <p>Total de projetos parados: <span>{{ Projeto.get_projetos_parados }}</span></p>
     </div>
   </div>
 </div>
@@ -76,8 +80,7 @@
       </div>
       <div class="modal-form-group">
         <label for="projeto_autores_edit">Autores</label>
-        <input type="text" id="projeto_autores_edit" name="projeto_autores" placeholder="Nome dos autores"
-          class="admin-input">
+        <input type="text" id="projeto_autores_edit" name="projeto_autores" placeholder="Nome dos autores" class="admin-input">
       </div>
       <div class="modal-form-group">
         <label for="projeto_categoria_edit">Categoria</label>
