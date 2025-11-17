@@ -8,7 +8,6 @@ from django.db.models import Q
 
 
 def home(request):
-  print(Projeto.objects.all().count())
   return render(request, 'home/home.html', {'projetos': filtrar_projetos(request), 'categorias': Categoria.objects.all(), 'campus': Campus.objects.all()})
 
 def patentes(request):

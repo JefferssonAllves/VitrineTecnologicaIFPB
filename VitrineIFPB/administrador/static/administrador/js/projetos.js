@@ -1,7 +1,5 @@
 function exibirResultados(data) {
   const corpoTabela = document.getElementById("corpo-tabela");
-  const editIconUrl = corpoTabela.dataset.editIcon;
-  const deleteIconUrl = corpoTabela.dataset.deleteIcon;
   projetos = data.projetos;
 
   corpoTabela.innerHTML = "";
@@ -23,7 +21,12 @@ function exibirResultados(data) {
       <td data-label="Título">${projeto.titulo}</td>
       <td data-label="Setor de Lotação">${projeto.setor_lotacao}</td>
       <td data-label="Ano do depósito">${projeto.ano_deposito}</td>
-      <td data-label="Status">${projeto.status}</td>
+      <td data-label="Status">
+        <span class="status
+          ${projeto.status === "Concluído" ? "concluido" : ""}
+          ${projeto.status === "Em Andamento" ? "em-andamento" : ""}
+          ${projeto.status === "Parado" ? "parado" : ""}">${projeto.status}</span>
+      </td>
       <td data-label="Observações de Tramitação">${projeto.observacoes}</td>
       <td data-label="Ações" class="admin-actions">Editar</td>
     `;

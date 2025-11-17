@@ -22,7 +22,7 @@
                 <label for="projeto_imagem">Imagem</label>
                 <label for="projeto_imagem" class="custom-file-upload projeto_imagem">
                   Selecionar Imagem
-                  <img src="{% static 'projeto/img/upload.png' %}" alt="">
+                  <img src="{% static  'projeto/img/upload.png' %}" alt="">
                 </label>
                 <input type="hidden" id="caminho_icone" value="{% static 'projeto/img/upload.png' %}">
                 <input type="file" onchange="atualizarLabel(this)" id="projeto_imagem" class="projeto-arquivo" name="projeto_imagem" accept="image/*" required>
