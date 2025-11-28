@@ -1,3 +1,49 @@
+.cabecalho-editar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.edit-h2{
+  font-size: 50px;
+  color: #b8860b;
+  margin-top: 35px;
+  margin-bottom: 20px;
+}
+
+.projeto-imagem-edit {
+  margin-top: 10px;
+}
+
+.projeto-imagem-edit img {
+  width: 260px;
+  height: 240px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.projeto-imagem-edit img:hover {
+  cursor: pointer;
+  filter: brightness(0.6);
+}
+
+.delete-button {
+  margin-top: 50px;
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 39px;
+  align-self: center;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
 .row-6 {
   display: flex;
   flex-direction: row;
@@ -6,9 +52,12 @@
 .row-6 > .form-group{
   width: 48%;
 }
+.form-group-img{
+  width: 100%;
+  gap: 4%;
 
-
-.form-group {
+}
+.form-group, .form-group-img{
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
@@ -85,6 +134,9 @@
 
 }
 
+.projeto-categorias-edit{
+  display: none;
+}
 
 .tab {
   display: none;

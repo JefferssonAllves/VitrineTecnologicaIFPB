@@ -8,37 +8,13 @@
     align-items: flex-start;
 }
 
-
-.admin-sidebar-button {
-    width: 100%;
-    padding: 12px;
-    background: #ddd;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 6px;
-    transition: 0.3s;
-    text-align: left;
-    font-weight: 450;
-}
-
-.admin-sidebar-button.active {
-    background: #168229;
-    color: white;
-}
-
-.admin-sidebar-button.active:hover {
-    background: #0d591b;
-}
-
-
 .admin-content-wrapper {
     flex: 1;
     background: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    min-height: 450px;
+    min-height: 463px;
 }
 
 .admin-content-wrapper p {
@@ -52,105 +28,13 @@
     color: #444;
 }
 
-.admin-section {
-    display: none;
-    animation: fadeIn 0.4s ease-in-out;
-}
-
-.admin-section.active {
-    display: block;
-}
-
-.admin-form-section {
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    height: 100%;
-}
-
-.admin-table-section {
-    margin-top: 20px;
-}
-
 .admin-h2 {
     margin-top: 0;
     margin-bottom: 20px;
     color: #444;
 }
 
-.admin-form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-    gap: 10px;
-}
 
-.admin-input,
-.admin-textarea,
-.admin-select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.admin-button {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background: #0d591b;
-    color: white;
-    cursor: pointer;
-    border: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.admin-button:hover {
-    background: #168229;
-}
-
-.admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-}
-
-.admin-table th,
-.admin-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-    font-size: 15px;
-}
-
-.admin-table th {
-    background: #f1f1f1;
-}
-
-.admin-actions button {
-    width: auto;
-    margin-right: 5px;
-    padding: 6px 12px;
-    font-size: 14px;
-}
-
-.admin-table-section .admin-button {
-    margin-top: 20px;
-    max-width: 250px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.botao{
-    background-color: #00000000;
-    border: none;
-    cursor: pointer;
-}
 
 /* MODAIS */
 .modal {
@@ -201,23 +85,6 @@
     gap: 10px;
     margin-top: 20px;
 }
-
-.delete-button {
-    background-color: #dc3545;
-}
-
-.delete-button:hover {
-    background-color: #c82333;
-}
-.status{
-    display: flex;
-    justify-content: center;
-    padding: 5px;
-    border-radius: 5px;
-}
-.concluido{background-color: #33cc14b0;}
-.em-andamento{background-color: #ffc107ab;}
-.parado{background-color: #d61427c0;}
 
 .category-main {
     max-width: 900px;

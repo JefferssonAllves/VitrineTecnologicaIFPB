@@ -25,6 +25,7 @@ services:
   web:
     build: .
     container_name: vitrine_web
+    image: vitrineifpb-web
     env_file:
       - .env
     environment:
@@ -43,6 +44,7 @@ services:
   nginx:
     build: ./nginx
     container_name: vitrine_nginx
+    image: vitrineifpb-nginx
     ports:
       - "80:80"
     volumes:

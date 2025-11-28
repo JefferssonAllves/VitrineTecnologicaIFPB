@@ -53,13 +53,29 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function atualizarLabel(input){
+  console.log(input);
+  console.log(input.value);
   const nome = input.value.replace(/^.*[\\\/]/, '');
-  const id = input.id;
+  const id = input.name;
 
   label = document.getElementsByClassName(id);
   caminho_imagem_label = document.getElementById('caminho_icone').value;
   label[0].textContent = nome;
   label[0].appendChild(document.createElement("img")).src = caminho_imagem_label;
+}
+
+
+function atualizarImagemPreview(input) {
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      const imagemPreview = document.getElementById('projeto_imagem_edit');
+      imagemPreview.src = e.target.result;
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  }
 }
 
 document.getElementById('abrir-modal-categorias').addEventListener('click', function() {
@@ -85,7 +101,7 @@ function atualizarCategoriasSelecionadas() {
   const categoriasSelecionadas = [];
   checkboxes.forEach(checkbox => {
     if (checkbox.checked) {
-      categoriasSelecionadas.push(checkbox.name);
+      categoriasSelecionadas.push(checkbox.id);
     }
   });
   if (categoriasSelecionadas.length === 0) {
@@ -97,6 +113,14 @@ function atualizarCategoriasSelecionadas() {
 }
 
 const checkboxes = document.querySelectorAll('.projeto-checkbox');
+const checkboxesEdit = document.querySelectorAll('.projeto-categorias-edit');
 checkboxes.forEach(checkbox => {
+  checkboxesEdit.forEach(checkboxEdit => {
+    if (checkbox.id === checkboxEdit.value) {
+      checkbox.checked = true;
+    }
+  });
   checkbox.addEventListener('change', atualizarCategoriasSelecionadas);
 });
+
+atualizarCategoriasSelecionadas();

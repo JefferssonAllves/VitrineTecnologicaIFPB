@@ -4,55 +4,61 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'administrador/css/admin.css' %}">
 <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
-<link rel="stylesheet" href="{% static 'projeto/css/cadastrar_projeto.css' %}">
+<link rel="stylesheet" href="{% static 'projeto/css/editar_projeto.css' %}">
 
 {% endblock %}
 {% block content %}
 <div class="container">
   {% include 'sidebar_admin.html' %}
   <div class="content">
-    <h2 class="admin-h2">Cadastrar Novo Projeto</h2>
+    <div class="cabecalho-editar">
+      <h3 class="edit-h2">Editar projeto: {{ projeto.titulo }}</h3>
+      <a method="POST" href="{% url 'excluir_projeto' projeto.id %}" class="delete-button">Excluir</a>
+    </div>
     <div class="admin-content-wrapper">
-      <form id="multiStepForm" action="{% url 'cadastrar_projeto' %}" method="post" enctype="multipart/form-data">
+      <form id="multiStepForm" action="{% url 'editar_projeto' projeto.id %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <!-- Aba 1 -->
         <div class="tab active" id="tab1">
           <div class="row-6">
-            <div class="form-group">
-                <label for="projeto_imagem">Imagem</label>
-                <label for="projeto_imagem" class="custom-input projeto_imagem">
-                  Selecionar Imagem
-                  <img src="{% static  'projeto/img/upload.png' %}" alt="">
+            <div>
+                <label for="projeto_imagem">
+                  Imagem do projeto
+                  <figure for="projeto_imagem" class="projeto-imagem-edit">
+                    <img id="projeto_imagem_edit" src="{{ projeto.imagem.url }}" alt="Imagem do projeto {{ projeto.titulo }}">
+                  </figure>
                 </label>
                 <input type="hidden" id="caminho_icone" value="{% static 'projeto/img/upload.png' %}">
-                <input type="file" onchange="atualizarLabel(this)" id="projeto_imagem" class="projeto-arquivo" name="projeto_imagem" accept="image/*" required>
+                <input type="file" onchange="atualizarImagemPreview(this)" id="projeto_imagem" class="projeto-arquivo" name="projeto_imagem" accept="image/*">
             </div>
-            <div class="form-group">
+            <div class="form-group-img">
+              <div class="form-group">
                 <label for="projeto_titulo">Titulo</label>
-                <input type="text" id="titulo" name="projeto_titulo" class="projeto-input" placeholder="Digite o título do projeto" required>
+                <input type="text" id="titulo" name="projeto_titulo" class="projeto-input" placeholder="Digite o titulo do projeto" value="{{ projeto.titulo }}">
+              </div>
+              <div class="form-group">
+                <label for="projeto_servidor">Servidor Solicitante</label>
+                <input type="text" id="projeto_servidor" name="projeto_servidor" class="projeto-input" placeholder="Digite o servidor solicitante" value="{{ projeto.servidor_solicitante }}">
+              </div>
+              <div class="form-group">
+                <label for="projeto_descricao">Descrição</label>
+                <textarea rows="3" placeholder="Digite a descrição do projeto" name="projeto_descricao" class="projeto-input">{{ projeto.descricao }}</textarea>
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="projeto_descricao">Descrição</label>
-            <textarea rows="3" placeholder="Adicione uma descrição do projeto" name="projeto_descricao" class="projeto-input"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="projeto_servidor">Servidor Solicitante</label>
-            <input type="text" id="projeto_servidor" name="projeto_servidor" class="projeto-input" placeholder="Digite o nome do servidor solicitante" required>
           </div>
           <div class="row-6">
             <div class="form-group">
               <label for="projeto_campus">Campus</label>
-              <select class="projeto-input" name="projeto_campus" id="projeto_campus" required>
+              <select class="projeto-input" name="projeto_campus" id="projeto_campus">
                 {% for campus in campus %}
                   <option value="{{ campus.id }}">{{ campus.nome }}</option>
                 {% endfor %}
               </select>
             </div>
             <div class="form-group">
-              <label for="projeto_ano">Ano de Depósito</label>
-              <input type="number" id="projeto_ano" name="projeto_ano" class="projeto-input" placeholder="Digite o ano de depósito" required>
-            </div>
+                <label for="projeto_ano">Ano de Depósito</label>
+                <input type="number" id="projeto_ano" name="projeto_ano" class="projeto-input" placeholder="Digite o ano de depósito" value="{{ projeto.ano_deposito }}">
+              </div>
           </div>
         </div>
 
@@ -74,19 +80,22 @@
             </div>
             <div class="form-group">
               <label for="projeto_setor">Setor</label>
-              <input type="text" id="projeto_setor" name="projeto_setor" class="projeto-input" placeholder="Digite o setor do projeto" required>
+              <input type="text" id="projeto_setor" name="projeto_setor" class="projeto-input" placeholder="Digite o setor" value="{{ projeto.setor_lotacao }}">
             </div>
           </div>
           <div class="form-group">
             <label for="projeto_link">Link do projeto no SUAP</label>
-            <input type="text" id="projeto_link" name="projeto_link" class="projeto-input" placeholder="Digite o link do projeto no SUAP" required>
+            <input type="text" id="projeto_link" name="projeto_link" class="projeto-input" placeholder="Digite o link do projeto" value="{{ projeto.link }}">
           </div>
           <div class="row-6">
             <div class="form-group">
               <label for="projeto_status">Status</label>
-              <select class="projeto-input" name="projeto_status" id="projeto_status" required>
+              <select class="projeto-input" name="projeto_status" id="projeto_status">
+                <option value="{{ projeto.status }}">{{ projeto.status }}</option>
                 {% for status in projeto_status %}
-                  <option value="{{ status }}">{{ status }}</option>
+                  {% if status != projeto.status %}
+                    <option value="{{ status }}">{{ status }}</option>
+                  {% endif %}
                 {% endfor %}
               </select>
             </div>
@@ -97,15 +106,18 @@
                 <img src="{% static 'projeto/img/upload.png' %}" alt="">
               </label>
               <input type="hidden" id="caminho_icone" value="{% static 'projeto/img/upload.png' %}">
-              <input type="file" onchange="atualizarLabel(this)" id="projeto_certificado" class="projeto-arquivo" name="projeto_certificado" required>
+              <input type="hidden" id="nome_certificado" name="projeto_certificado" value="{{ projeto.certificado.url }}">
+              <input type="file" onchange="atualizarLabel(this)" id="projeto_certificado" class="projeto-arquivo" name="projeto_certificado" value="{{ projeto.certificado.url }}">
             </div>
           </div>
           <div class="form-group">
             <label for="projeto_observacoes">Observações</label>
-            <textarea rows="3" placeholder="Adicione observações sobre o projeto" name="projeto_observacoes" class="projeto-input"></textarea>
-
+            <textarea rows="3" placeholder="Adicione observações sobre o projeto" name="projeto_observacoes" class="projeto-input">{{ projeto.observacoes }}</textarea>
           </div>
         </div>
+        {% for categoria in projeto.categorias.all %}
+          <input class="projeto-categorias-edit" type="checkbox" name="projeto_categorias" id="categoria_{{ categoria.id }}" value="{{ categoria.nome }}" class="projeto-checkbox">
+        {% endfor %}
         <!-- Botões de Navegação -->
         <div class="navigation-buttons">
             <button type="button" id="prevBtn">Voltar</button>
@@ -120,4 +132,6 @@
 {% endblock %}
 {% block script %}
 <script src="{% static 'projeto/js/cadastrar_projeto.js' %}"></script>
+<script src="{% static 'projeto/js/editar_projeto.js' %}"></script>
+
 {% endblock %}

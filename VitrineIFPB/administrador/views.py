@@ -72,26 +72,49 @@ def cadastrar_projeto(request):
     return render(request, 'projetos/cadastrar_projeto.html', {'categorias':Categoria.objects.all(), 'campus': Campus.objects.all(), 'projeto_status': Projeto.STATUS_CHOICES})
   return redirect('projetos')
 
-def editar_projeto(request):
+def editar_projeto(request, projeto_id):
   if request.method == 'POST':
-    id = request.POST.get('projeto_id')
+    imagem = request.FILES.get('projeto_imagem')
     titulo = request.POST.get('projeto_titulo')
+    campus = request.POST.get('projeto_campus')
+    servidor = request.POST.get('projeto_servidor')
     descricao = request.POST.get('projeto_descricao')
-    autores = request.POST.get('projeto_autores')
-    categoria = request.POST.get('projeto_categoria')
+    setor_lotacao = request.POST.get('projeto_setor')
+    ano_deposito = request.POST.get('projeto_ano')
+    categorias = request.POST.getlist('projeto_categorias')
+    link_suap = request.POST.get('projeto_link')
+    certificado = request.FILES.get('projeto_certificado')
+    status = request.POST.get('projeto_status')
+    observacoes = request.POST.get('projeto_observacoes')
 
-    if request.FILES.get('projeto_imagem') is not None:
-      imagem = request.FILES['projeto_imagem']
-    else:
-      imagem = Projeto.objects.get(id=id).imagem
+    projeto = Projeto.objects.get(id=projeto_id)
+    if imagem:
+      projeto.imagem = imagem
 
-    Projeto.objects.filter(id=id).update(titulo=titulo, descricao=descricao, autores=autores, categoria=categoria, imagem=imagem)
-  return redirect('projetos')
+    projeto.titulo = titulo
+    projeto.campus = Campus.objects.get(id=int(campus))
+    projeto.servidor_solicitante = servidor
+    projeto.descricao = descricao
+    projeto.setor_lotacao = setor_lotacao
+    projeto.ano_deposito = ano_deposito
+    projeto.link = link_suap
+    
+    if certificado:
+      projeto.certificado = certificado
 
-def excluir_projeto(request):
-  if request.method == "POST":
-    projeto = request.POST.get('projeto_id')
-    Projeto.objects.filter(id=projeto).delete()
+    projeto.status = status
+    projeto.observacoes = observacoes
+    projeto.save()
+
+    projeto.categorias.clear()
+    for categoria in categorias:
+      projeto.categorias.add(Categoria.objects.get(id=int(categoria)))
+
+    return redirect('projetos')
+  return render(request, 'projetos/editar_projeto.html', {'projeto': Projeto.objects.get(id=projeto_id), 'categorias':Categoria.objects.all(), 'campus': Campus.objects.all(), 'projeto_status': Projeto.STATUS_CHOICES})
+
+def excluir_projeto(request, projeto_id):
+  Projeto.objects.filter(id=projeto_id).delete()
   return redirect('projetos')
 
 

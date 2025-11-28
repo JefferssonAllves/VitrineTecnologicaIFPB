@@ -3,6 +3,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'administrador/css/admin.css' %}">
+<link rel="stylesheet" href="{% static 'projeto/css/projetos.css' %}">
 <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
 {% endblock %}
 
@@ -17,36 +18,40 @@
         <input type="hidden" id="url-busca" value="{% url 'buscar_projetos' %}">
         <input type="text" placeholder="Pesquisar projetos:" id="campo-busca">
       </form>
-      <table class="admin-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Título</th>
-            <th>Setor de Lotação</th>
-            <th>Ano do depósito</th>
-            <th>Status</th>
-            <th>Observações de Tramitação</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody id="corpo-tabela" data-edit-icon="{% static 'administrador/icons/edit.png' %}" data-delete-icon="{% static 'administrador/icons/delete.png' %}">
-          {% for projeto in projetos %}
-          <tr>
-            <td data-label="Id">{{ projeto.id }}</td>
-            <td data-label="Título">{{ projeto.titulo }}</td>
-            <td data-label="Setor de Lotação">{{ projeto.setor_lotacao }}</td>
-            <td data-label="Ano do depósito">{{ projeto.ano_deposito }}</td>
-            <td data-label="Status">
-              <span {% if projeto.status == 'Concluído' %}class="status concluido"{% elif projeto.status == 'Em Andamento' %}class="status em-andamento"{% elif projeto.status == 'Parado' %}class="status parado"{% endif %}>
-                {{ projeto.status }}
-              </span>
-              </td>
-            <td data-label="Observações de Tramitação">{{ projeto.observacoes }}</td>
-            <td data-label="Ações" class="admin-actions">Editar</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      <div class="section-table">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Setor de Lotação</th>
+              <th>Ano do depósito</th>
+              <th>Status</th>
+              <th>Link</th>
+              <th>Observações de Tramitação</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="corpo-tabela" data-edit-icon="{% static 'administrador/icons/edit.png' %}" data-delete-icon="{% static 'administrador/icons/delete.png' %}">
+            {% for projeto in projetos %}
+            <tr>
+              <td data-label="Id">{{ projeto.id }}</td>
+              <td data-label="Título">{{ projeto.titulo }}</td>
+              <td data-label="Setor de Lotação">{{ projeto.setor_lotacao }}</td>
+              <td data-label="Ano do depósito">{{ projeto.ano_deposito }}</td>
+              <td data-label="Status">
+                <span {% if projeto.status == 'Concluído' %}class="status concluido"{% elif projeto.status == 'Em Andamento' %}class="status em-andamento"{% elif projeto.status == 'Parado' %}class="status parado"{% endif %}>
+                  {{ projeto.status }}
+                </span>
+                </td>
+              <td data-label="Link"><a href="{{ projeto.link }}">{{ projeto.link }}</a></td>
+              <td data-label="Observações de Tramitação">{{ projeto.observacoes }}</td>
+              <td data-label="Ações" class="admin-actions"><a href="{% url 'editar_projeto' projeto.id %}" class="botao-editar">Editar</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
       <p>Total de projetos cadastrados: <span>{{ Projeto.quantidade_projetos }}</span></p>
       <p>Total de projetos concluidos: <span>{{ Projeto.get_projetos_concluidos }}</span></p>
       <p>Total de projetos em andamento: <span>{{ Projeto.get_projetos_em_andamento }}</span></p>
@@ -54,79 +59,10 @@
     </div>
   </div>
 </div>
-
-
-<!-- MODAL DE EDIÇÃO DE PROJETOS -->
-<div id="modal_edit_projeto" class="modal">
-  <div class="modal-content">
-    <span class="close-button" onclick="closeModal('modal_edit_projeto')">&times;</span>
-    <h2 id="edit_modal_title_projeto">Editar Projeto</h2>
-    <form method="POST" action="{% url 'editar_projeto' %}" enctype="multipart/form-data">
-      {% csrf_token %}
-      <input id="projeto_id" name="projeto_id" type="hidden" value="">
-      <div class="modal-form-group">
-        <label for="projeto_imagem_edit">Imagem do Projeto</label>
-        <input type="file" id="projeto_imagem_edit" name="projeto_imagem" accept="image/*" class="admin-input">
-      </div>
-      <div class="modal-form-group">
-        <label for="projeto_titulo_edit">Título</label>
-        <input type="text" id="projeto_titulo_edit" name="projeto_titulo" placeholder="Digite o título do projeto"
-          class="admin-input">
-      </div>
-      <div class="modal-form-group">
-        <label for="projeto_descricao_edit">Descrição</label>
-        <textarea id="projeto_descricao_edit" name="projeto_descricao" rows="4" placeholder="Descreva o projeto"
-          class="admin-input"></textarea>
-      </div>
-      <div class="modal-form-group">
-        <label for="projeto_autores_edit">Autores</label>
-        <input type="text" id="projeto_autores_edit" name="projeto_autores" placeholder="Nome dos autores" class="admin-input">
-      </div>
-      <div class="modal-form-group">
-        <label for="projeto_categoria_edit">Categoria</label>
-        <select id="projeto_categoria_edit" name="projeto_categoria" class="admin-input">
-          <option value="patente">Patente</option>
-          <option value="software">Software</option>
-        </select>
-      </div>
-      <div class="modal-form-group">
-        <label for="projeto_areas_edit">Área do Conhecimento</label>
-        <select id="projeto_areas_edit" name="projeto_areas" class="admin-input" multiple>
-          {% for categoria in categorias %}
-            <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <div class="modal-actions">
-        <button type="submit" class="admin-button">Salvar alterações</button>
-        <button type="button" class="admin-button delete-button"
-          onclick="closeModal('modal_edit_projeto')">Cancelar</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- MODAL DE EXCLUSÃO DE PROJETOS -->
-<div id="modal_delete_projeto" class="modal">
-  <div class="modal-content">
-    <span class="close-button" onclick="closeModal('modal_delete_projeto')">&times;</span>
-    <h2>Confirmar Exclusão</h2>
-    <p id="delete_message_projeto"></p>
-    <form method="POST" action="{% url 'excluir_projeto' %}">
-      {% csrf_token %}
-      <input id="projeto_id_delete" name="projeto_id" type="hidden" value="">
-      <div class="modal-actions">
-        <button type="submit" class="admin-button delete-button">Excluir</button>
-        <button type="button" class="admin-button" onclick="closeModal('modal_delete_projeto')">Cancelar</button>
-      </div>
-    </form>
-  </div>
-</div>
 {% endblock %}
 
 {% block script %}
   <script src="{% static 'js/pesquisa.js' %}"></script>
   <script src="{% static 'administrador/js/admin.js' %}"></script>
-  <script src="{% static 'administrador/js/modal_projetos.js' %}"></script>
   <script src="{% static 'administrador/js/projetos.js' %}"></script>
 {% endblock %}

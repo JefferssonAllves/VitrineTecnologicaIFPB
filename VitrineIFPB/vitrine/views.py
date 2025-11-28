@@ -11,10 +11,10 @@ def home(request):
   return render(request, 'home/home.html', {'projetos': filtrar_projetos(request), 'categorias': Categoria.objects.all(), 'campus': Campus.objects.all()})
 
 def patentes(request):
-  return render(request, 'patentes/patentes.html', {'projetos': filtrar_projetos(request), 'categorias': Categoria.objects.all(), 'campus': Campus.objects.all()})
+  return render(request, 'patentes/patentes.html', {'projetos': filtrar_projetos(request, 'patentes'), 'categorias': Categoria.objects.all(), 'campus': Campus.objects.all()})
 
 def softwares(request):
-  return render(request, 'softwares/softwares.html', {'projetos': filtrar_projetos(request), 'categorias': Categoria.objects.all(), 'campus': Campus.objects.all()})
+  return render(request, 'softwares/softwares.html', {'projetos': filtrar_projetos(request, 'softwares'), 'categorias': Categoria.objects.all(), 'campus': Campus.objects.all()})
 
 def institucional(request):
   return render(request, 'institucional/institucional.html')
@@ -23,13 +23,19 @@ def detalhes_projeto(request, projeto_id):
   projeto = Projeto.objects.get(id=projeto_id)
   return render(request, 'detalhes_projeto/detalhes_projeto.html', {'projeto': projeto})
 
-def filtrar_projetos(request):
+def filtrar_projetos(request, page=""):
   categoria_id = request.GET.get('categoria')
   campus_id = request.GET.get('campus')
   if categoria_id:
     return Projeto.objects.filter(categorias__id=categoria_id)
   elif campus_id:
     return Projeto.objects.filter(campus__id=campus_id)
+
+  if page == 'patentes':
+    return Projeto.objects.filter(categorias__nome='Patente')
+  elif page == 'softwares':
+    return Projeto.objects.filter(categorias__nome='Software')
+
   return Projeto.objects.all()
 
 #FUNCAO PARA BUSCAR PROJETOS ATRAVES DA BARRA DE PESQUISA

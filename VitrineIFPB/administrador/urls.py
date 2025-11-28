@@ -11,8 +11,8 @@ urlpatterns = [
 
   path('projetos/', login_required(views.projetos), name='projetos'),
   path('cadastrar_projeto/', login_required(views.cadastrar_projeto), name='cadastrar_projeto'),
-  path('editar_projeto/', login_required(views.editar_projeto), name='editar_projeto'),
-  path('excluir_projeto/', login_required(views.excluir_projeto), name='excluir_projeto'),
+  path('editar_projeto/id=<int:projeto_id>/', login_required(views.editar_projeto), name='editar_projeto'),
+  path('excluir_projeto/id=<int:projeto_id>/', login_required(views.excluir_projeto), name='excluir_projeto'),
 
   path('categorias/', login_required(views.categorias), name='categorias'),
   path('cadastrar_categoria/', login_required(views.cadastrar_categoria), name='cadastrar_categoria'),
