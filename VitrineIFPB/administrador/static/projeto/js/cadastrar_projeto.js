@@ -53,8 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function atualizarLabel(input){
-  console.log(input);
-  console.log(input.value);
   const nome = input.value.replace(/^.*[\\\/]/, '');
   const id = input.name;
 

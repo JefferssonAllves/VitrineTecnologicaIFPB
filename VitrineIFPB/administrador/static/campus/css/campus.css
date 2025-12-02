@@ -1,0 +1,33 @@
+
+.adicionar-campus{
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+  margin-top: 20px;
+  width: 100%;
+
+}
+.adicionar-campus form{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+
+}
+.adicionar-campus-form input{
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.adicionar-campus-actions{
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.admin-content-wrapper {
+  min-height: 450px;
+}

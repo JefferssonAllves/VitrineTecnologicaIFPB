@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from .models import Projeto, Categoria, Campus
 
 #TODO BUSCADOR DE PROJETOS
@@ -65,6 +65,8 @@ def buscar_projetos(request):
         'setor_lotacao': projeto.setor_lotacao,
         'ano_deposito': projeto.ano_deposito,
         'status': projeto.status,
+        'link': projeto.link,
+        'link_edicao': reverse('editar_projeto', args=[projeto.id]),
         'observacoes': projeto.observacoes,
         'categorias': [categoria.nome for categoria in projeto.categorias.all()],
       })
@@ -87,6 +89,27 @@ def buscar_categorias(request):
       categorias_json.append({
         'id': categoria.id,
         'nome': categoria.nome,
+        'quantidade_projetos': categoria.quantidade_projetos
       })
     return JsonResponse({'categorias': categorias_json})
+  return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+def buscar_campus(request):
+  if request.method == 'POST':
+    body = json.loads(request.body)
+    termo = body['termo']
+
+    if not termo:
+      campus = Campus.objects.all()
+    else:
+      campus = Campus.objects.filter(nome__icontains=termo)
+
+    campus_json = []
+    for campus in campus:
+      campus_json.append({
+        'id': campus.id,
+        'nome': campus.nome,
+        'quantidade_projetos': campus.quantidade_projetos
+      })
+    return JsonResponse({'campus': campus_json})
   return JsonResponse({'error': 'Invalid request method'}, status=400)

@@ -1,0 +1,68 @@
+.admin-table-section {
+  margin-top: 20px;
+}
+
+.admin-form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.section-table{
+  flex: 1;
+  width: 100%;
+  max-height: 380px;
+  overflow-y: auto;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin-top: 20px;
+  scroll-behavior: smooth;
+}
+
+.section-table::-webkit-scrollbar {
+  width: 0.4rem;
+}
+.section-table::-webkit-scrollbar-track {
+  background: #00000000;
+}
+.section-table::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 2rem;
+}
+
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th, .admin-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  font-size: 15px;
+}
+
+.admin-table th {
+  position: sticky;
+  top: -5px;
+  z-index: 10;
+  padding: 10px 12px;
+  background: #f1f1f1;
+}
+
+.admin-actions button {
+  width: auto;
+  margin-right: 5px;
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+.admin-table-section .admin-button {
+  margin-top: 20px;
+  max-width: 250px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

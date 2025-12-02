@@ -4,6 +4,8 @@
 {% block head %}
 <link rel="stylesheet" href="{% static 'administrador/css/admin.css' %}">
 <link rel="stylesheet" href="{% static 'projeto/css/projetos.css' %}">
+<link rel="stylesheet" href="{% static 'administrador/css/table.css' %}">
+
 <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
 {% endblock %}
 
@@ -13,11 +15,14 @@
   <div class="content">
     <h2 class="admin-h2">Projetos Cadastrados</h2>
     <div class="admin-content-wrapper">
-      <form action="{% url 'buscar_projetos' %}" method="GET">
-        {% csrf_token %}
-        <input type="hidden" id="url-busca" value="{% url 'buscar_projetos' %}">
-        <input type="text" placeholder="Pesquisar projetos:" id="campo-busca">
-      </form>
+      <div class="cabecalho">
+        <form action="{% url 'buscar_projetos' %}" method="GET">
+          {% csrf_token %}
+          <input type="hidden" id="url-busca" value="{% url 'buscar_projetos' %}">
+          <input type="text" placeholder="Pesquisar projetos:" id="campo-busca">
+        </form>
+        <a href="{% url 'cadastrar_projeto' %}" class="btn success">+ Adicionar novo projeto</a>
+      </div>
       <div class="section-table">
         <table class="admin-table">
           <thead>
@@ -46,23 +51,25 @@
                 </td>
               <td data-label="Link"><a href="{{ projeto.link }}">{{ projeto.link }}</a></td>
               <td data-label="Observações de Tramitação">{{ projeto.observacoes }}</td>
-              <td data-label="Ações" class="admin-actions"><a href="{% url 'editar_projeto' projeto.id %}" class="botao-editar">Editar</a></td>
+              <td data-label="Ações" class="admin-actions"><a href="{% url 'editar_projeto' projeto.id %}" class="btn primary">Editar</a></td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
-      <p>Total de projetos cadastrados: <span>{{ Projeto.quantidade_projetos }}</span></p>
-      <p>Total de projetos concluidos: <span>{{ Projeto.get_projetos_concluidos }}</span></p>
-      <p>Total de projetos em andamento: <span>{{ Projeto.get_projetos_em_andamento }}</span></p>
-      <p>Total de projetos parados: <span>{{ Projeto.get_projetos_parados }}</span></p>
+      <div class="info-projetos">
+        <p>Total de projetos cadastrados: <span>{{ Projeto.quantidade_projetos }}</span></p>
+        <p>Total de projetos concluidos: <span>{{ Projeto.get_projetos_concluidos }}</span></p>
+        <p>Total de projetos em andamento: <span>{{ Projeto.get_projetos_em_andamento }}</span></p>
+        <p>Total de projetos parados: <span>{{ Projeto.get_projetos_parados }}</span></p>
+      </div>
     </div>
   </div>
 </div>
 {% endblock %}
 
 {% block script %}
+  <script src="{% static 'projeto/js/projetos.js' %}"></script>
   <script src="{% static 'js/pesquisa.js' %}"></script>
   <script src="{% static 'administrador/js/admin.js' %}"></script>
-  <script src="{% static 'administrador/js/projetos.js' %}"></script>
 {% endblock %}

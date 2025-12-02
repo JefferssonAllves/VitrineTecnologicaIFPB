@@ -13,7 +13,7 @@
   <div class="content">
     <div class="cabecalho-editar">
       <h3 class="edit-h2">Editar projeto: {{ projeto.titulo }}</h3>
-      <a method="POST" href="{% url 'excluir_projeto' projeto.id %}" class="delete-button">Excluir</a>
+      <button class="btn danger excluirProjetoBtn" onclick="modalExcluirProjeto('{{ projeto.titulo }}')">Excluir</button>
     </div>
     <div class="admin-content-wrapper">
       <form id="multiStepForm" action="{% url 'editar_projeto' projeto.id %}" method="post" enctype="multipart/form-data">
@@ -120,12 +120,27 @@
         {% endfor %}
         <!-- Botões de Navegação -->
         <div class="navigation-buttons">
-            <button type="button" id="prevBtn">Voltar</button>
-            <button type="button" id="nextBtn">Próximo</button>
-            <button type="submit" id="submitBtn" style="display: none;">Enviar</button>
+          <button type="button" id="prevBtn" class="btn danger">Voltar</button>
+          <button type="button" id="nextBtn" class="btn success">Próximo</button>
+          <button type="submit" id="submitBtn" class="btn success" style="display: none;">Enviar</button>
         </div>
       </form>
     </div>
+  </div>
+</div>
+
+<div id="modal_delete_projeto" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close-button" onclick="modalExcluirProjeto('{{ projeto.titulo }}')">&times;</span>
+    <h2>Confirmar Exclusão</h2>
+    <p id="delete_message_projeto"></p>
+    <div>
+      <div class="modal-actions">
+        <a method="POST" href="{% url 'excluir_projeto' projeto.id %}" class="btn danger">Excluir</a>
+        <button type="button" class="btn success" onclick="modalExcluirProjeto('{{ projeto.titulo }}')">Cancelar</button>
+      </div>
+    </div>
+    </form>
   </div>
 </div>
 

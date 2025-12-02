@@ -98,7 +98,7 @@ def editar_projeto(request, projeto_id):
     projeto.setor_lotacao = setor_lotacao
     projeto.ano_deposito = ano_deposito
     projeto.link = link_suap
-    
+
     if certificado:
       projeto.certificado = certificado
 
@@ -120,14 +120,13 @@ def excluir_projeto(request, projeto_id):
 
 #TODO CONTROLE DE CATEGORIAS
 def categorias(request):
+
   return render(request, 'categorias/categorias.html', {'categorias':Categoria.objects.all()})
 
 def cadastrar_categoria(request):
   if request.method == 'POST':
     nome = request.POST.get('categoria_nome')
     Categoria(nome=nome).save()
-  else:
-    return render(request, 'categorias/cadastrar_categoria.html')
   return redirect('categorias')
 
 def editar_categoria(request):
@@ -146,8 +145,6 @@ def excluir_categoria(request):
 
 
 
-
-
 #TODO CONTROLE DE CAMPUS
 def campus(request):
   return render(request, 'campus/campus.html', {'campus':Campus.objects.all()})
@@ -156,8 +153,6 @@ def cadastrar_campus(request):
   if request.method == 'POST':
     nome = request.POST.get('campus_nome')
     Campus(nome=nome).save()
-  else:
-    return render(request, 'campus/cadastrar_campus.html')
   return redirect('campus')
 
 def editar_campus(request):

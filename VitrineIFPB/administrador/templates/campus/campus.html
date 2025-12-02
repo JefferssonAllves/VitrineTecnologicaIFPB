@@ -3,6 +3,8 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'administrador/css/admin.css' %}">
+<link rel="stylesheet" href="{% static 'administrador/css/table.css' %}">
+<link rel="stylesheet" href="{% static 'campus/css/campus.css' %}">
 <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
 {% endblock %}
 
@@ -11,28 +13,34 @@
   {% include 'sidebar_admin.html' %}
   <div class="content">
     <h2 class="admin-h2">Campus Cadastrados</h2>
-    <div class="admin-content-wrapper">
-      <form action="">
-        {% csrf_token %}
-        <input type="text" placeholder="Pesquisar campus:" id="campo-busca">
-      </form>
-      <div class="admin-table-section">
+    <div class="admin-content-wrapper" id="admin-content-wrapper">
+      <div class="cabecalho">
+        <form action="{% url 'buscar_campus' %}" method="GET">
+          {% csrf_token %}
+          <input type="hidden" id="url-busca" value="{% url 'buscar_campus' %}">
+          <input type="text" placeholder="Pesquisar campus:" id="campo-busca">
+        </form>
+        <button class="btn success" onclick="modalAdicionarCampus()"> + Adicionar novo campus</button>
+      </div>
+      <div class="section-table">
         <table class="admin-table">
           <thead>
             <tr>
               <th>ID</th>
               <th>Campus</th>
+              <th>Quantidade de projetos</th>
               <th>Ações</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="corpo-tabela">
             {% for campus in campus %}
             <tr>
               <td data-label="id">{{ campus.id }}</td>
               <td data-label="nome">{{ campus.nome }}</td>
+              <td data-label="projetos">{{ campus.quantidade_projetos }}</td>
               <td data-label="Ações" class="admin-actions">
-                <button class="admin-actions-button"onclick="openEditModalCampus('{{ campus.id }}', '{{ campus.nome }}')">Editar</button>
-                <button class="admin-actions-button"onclick="openDeleteModalCampus('{{ campus.id }}', '{{ campus.nome }}')">Excluir</button>
+                <button class="btn primary"onclick="modalEditCampus('{{ campus.id }}', '{{ campus.nome }}')">Editar</button>
+                <button class="btn danger"onclick="modalDeleteCampus('{{ campus.id }}', '{{ campus.nome }}')">Excluir</button>
               </td>
             </tr>
             {% endfor %}
@@ -40,6 +48,19 @@
         </table>
       </div>
       <p>Total de campus cadastrados: <span>{{ campus|length }}</span></p>
+      <div class="adicionar-campus" id="adicionar-campus" style="display: none;">
+        <form method="POST" action="{% url 'cadastrar_campus' %}">
+          {% csrf_token %}
+          <div class="adicionar-campus-form">
+            <label for="campus_nome">Nome da campus</label>
+            <input type="text" id="campus_nome" name="campus_nome" placeholder="Digite o nome da campus">
+          </div>
+          <div class="adicionar-campus-actions">
+            <button type="button" class="btn danger"onclick="modalAdicionarCampus('adicionar-campus')">Cancelar</button>
+            <button type="submit" class="btn success">Salvar</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
@@ -57,8 +78,8 @@
         <input type="text" id="campus_nome_edit" name="campus_nome" class="admin-input">
       </div>
       <div class="modal-actions">
-        <button type="submit" class="admin-button">Salvar alterações</button>
-        <button type="button" class="admin-button delete-button"onclick="closeModal('modal_edit_campus')">Cancelar</button>
+        <button type="submit" class="btn success">Salvar alterações</button>
+        <button type="button" class="btn danger"onclick="closeModal('modal_edit_campus')">Cancelar</button>
       </div>
     </form>
   </div>
@@ -74,8 +95,8 @@
       {% csrf_token %}
       <input id="campus_id_delete" name="campus_id" type="hidden" value="">
       <div class="modal-actions">
-        <button type="submit" class="admin-button delete-button">Excluir</button>
-        <button type="button" class="admin-button" onclick="closeModal('modal_delete_campus')">Cancelar</button>
+        <button type="submit" class="btn success">Excluir</button>
+        <button type="button" class="btn danger" onclick="closeModal('modal_delete_campus')">Cancelar</button>
       </div>
     </form>
   </div>
@@ -85,5 +106,5 @@
 {% block script %}
 <script src="{% static 'js/pesquisa.js' %}"></script>
 <script src="{% static 'administrador/js/admin.js' %}"></script>
-<script src="{% static 'administrador/js/modal_campus.js' %}"></script>
+<script src="{% static 'campus/js/campus.js' %}"></script>
 {% endblock %}

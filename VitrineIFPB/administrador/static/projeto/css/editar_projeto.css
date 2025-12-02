@@ -5,6 +5,9 @@
   align-items: center;
 }
 
+.excluirProjetoBtn{
+  margin-top: 50px;
+}
 
 .edit-h2{
   font-size: 50px;
@@ -28,21 +31,6 @@
   filter: brightness(0.6);
 }
 
-.delete-button {
-  margin-top: 50px;
-  background-color: #dc3545;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  height: 39px;
-  align-self: center;
-}
-
-.delete-button:hover {
-  background-color: #c82333;
-}
 
 .row-6 {
   display: flex;
@@ -73,6 +61,7 @@
   padding: 11px;
   border-radius: 5px;
   border: 1px solid #ccc;
+  text-overflow: ellipsis;
 }
 
 .custom-input {
@@ -165,18 +154,3 @@
   margin-left: auto;
 }
 
-#nextBtn, #prevBtn, #submitBtn {
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#nextBtn, #submitBtn {
-  background-color: #4CAF50;
-}
-
-#prevBtn {
-  background-color: #df6860;
-}

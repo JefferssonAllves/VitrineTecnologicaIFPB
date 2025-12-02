@@ -9,13 +9,14 @@ services:
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_HOST: ${DB_HOST}
     volumes:
       - mysql_data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "${DB_PORT}:${DB_PORT}"
     networks:
       - vitrine-network
+
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
       interval: 10s
@@ -29,7 +30,7 @@ services:
     env_file:
       - .env
     environment:
-      - DATABASE_URL=mysql://django_user:${DB_PASSWORD}@mysql:3306/vitrineifpb
+      - DATABASE_URL=mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/vitrineifpb
       - DB_HOST=${DB_HOST}
     volumes:
       - .:/app

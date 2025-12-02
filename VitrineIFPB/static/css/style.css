@@ -172,6 +172,32 @@ footer {
   padding: 20px;
 }
 
+/* BOTOES */
+.btn{
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 39px;
+  align-self: center;
+  font-size: 15px;
+}
+
+.success{
+  background-color: #1ea336;
+}
+
+.danger{
+  background-color: #db4545;
+}
+
+.primary{
+  background-color: #486ad8;
+}
+
+
+
 /* ANIMAÇÕES */
 @keyframes fadeIn {
   from {

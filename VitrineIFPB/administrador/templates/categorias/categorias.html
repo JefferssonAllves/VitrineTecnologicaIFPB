@@ -3,6 +3,8 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'administrador/css/admin.css' %}">
+<link rel="stylesheet" href="{% static 'administrador/css/table.css' %}">
+<link rel="stylesheet" href="{% static 'categoria/css/categorias.css' %}">
 <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
 
 {% endblock %}
@@ -12,29 +14,34 @@
   {% include 'sidebar_admin.html' %}
   <div class="content">
     <h2 class="admin-h2">Categorias Cadastradas</h2>
-    <div class="admin-content-wrapper">
-      <form action="">
-        {% csrf_token %}
-        <input type="hidden" id="url-busca" value="{% url 'buscar_categorias' %}">
-        <input type="text" placeholder="Pesquisar categorias:" id="campo-busca">
-      </form>
-      <div class="admin-table-section">
+    <div class="admin-content-wrapper" id="admin-content-wrapper">
+      <div class="cabecalho">
+        <form action="">
+          {% csrf_token %}
+          <input type="hidden" id="url-busca" value="{% url 'buscar_categorias' %}">
+          <input type="text" placeholder="Pesquisar categorias:" id="campo-busca">
+        </form>
+        <button class="btn success" onclick="modalAdicionarCategoria()"> + Adicionar nova categoria</button>
+      </div>
+      <div class="section-table">
         <table class="admin-table">
           <thead>
             <tr>
               <th>ID</th>
               <th>Categoria</th>
+              <th>Quantidade de Projetos</th>
               <th>Ações</th>
             </tr>
           </thead>
-          <tbody id="corpo-tabela" data-edit-icon="{% static 'administrador/icons/edit.png' %}" data-delete-icon="{% static 'administrador/icons/delete.png' %}">
+          <tbody id="corpo-tabela">
             {% for categoria in categorias %}
             <tr>
               <td data-label="id">{{ categoria.id }}</td>
               <td data-label="nome">{{ categoria.nome }}</td>
+              <td data-label="projetos">{{ categoria.quantidade_projetos }}</td>
               <td data-label="Ações" class="admin-actions">
-                <button class="admin-actions-button"onclick="openEditModalCategoria('{{ categoria.id }}', '{{ categoria.nome }}')">Editar</button>
-                <button class="admin-actions-button"onclick="openDeleteModalCategoria('{{ categoria.id }}', '{{ categoria.nome }}')">Excluir</button>
+                <button class="btn primary"onclick="modalEditCategoria('{{ categoria.id }}', '{{ categoria.nome }}')">Editar</button>
+                <button class="btn danger"onclick="modalDeleteCategoria('{{ categoria.id }}', '{{ categoria.nome }}')">Excluir</button>
               </td>
             </tr>
             {% endfor %}
@@ -42,6 +49,20 @@
         </table>
       </div>
       <p>Total de categorias cadastradas: <span>{{ categorias|length }}</span></p>
+      <!-- MODAL DE CADASTRO DE CATEGORIAS -->
+      <div class="adicionar-categoria" id="adicionar-categoria" style="display: none;">
+        <form method="POST" action="{% url 'cadastrar_categoria' %}">
+          {% csrf_token %}
+          <div class="adicionar-categoria-form">
+            <label for="categoria_nome">Nome da Categoria</label>
+            <input type="text" id="categoria_nome" class="categoria-input" name="categoria_nome" placeholder="Digite o nome da categoria">
+          </div>
+          <div class="adicionar-categoria-actions">
+            <button type="button" class="btn danger"onclick="modalAdicionarCampus('adicionar-categoria')">Cancelar</button>
+            <button type="submit" class="btn success">Salvar</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
@@ -56,15 +77,16 @@
       <input type="hidden" id="categoria_id_edit" name="categoria_id" value="">
       <div class="modal-form-group">
         <label for="categoria_nome_edit">Nome da Categoria</label>
-        <input type="text" id="categoria_nome_edit" name="categoria_nome" class="admin-input">
+        <input type="text" id="categoria_nome_edit" name="categoria_nome" class="categoria-input">
       </div>
       <div class="modal-actions">
-        <button type="submit" class="admin-button">Salvar alterações</button>
-        <button type="button" class="admin-button delete-button"onclick="closeModal('modal_edit_categoria')">Cancelar</button>
+        <button type="submit" class="btn success">Salvar alterações</button>
+        <button type="button" class="btn danger"onclick="closeModal('modal_edit_categoria')">Cancelar</button>
       </div>
     </form>
   </div>
 </div>
+
 
 <!-- MODAL DE EXCLUSÃO DE CATEGORIAS -->
 <div id="modal_delete_categoria" class="modal">
@@ -74,19 +96,20 @@
     <p id="delete_message_categoria"></p>
     <form method="POST" action="{% url 'excluir_categoria' %}">
       {% csrf_token %}
+      <p>Você realmente deseja excluir a categoria selecionada? Essa ação não podera ser desfeita.</p>
       <input id="categoria_id_delete" name="categoria_id" type="hidden" value="">
       <div class="modal-actions">
-        <button type="submit" class="admin-button delete-button">Excluir</button>
-        <button type="button" class="admin-button" onclick="closeModal('modal_delete_categoria')">Cancelar</button>
+        <button type="submit" class="btn danger">Excluir</button>
+        <button type="button" class="btn success" onclick="closeModal('modal_delete_categoria')">Cancelar</button>
       </div>
     </form>
   </div>
 </div>
+
 {% endblock %}
 
 {% block script %}
 <script src="{% static 'administrador/js/admin.js' %}"></script>
-<script src="{% static 'administrador/js/modal_categorias.js' %}"></script>
-<script src="{% static 'administrador/js/categorias.js' %}"></script>
+<script src="{% static 'categoria/js/categorias.js' %}"></script>
 <script src="{% static 'js/pesquisa.js' %}"></script>
 {% endblock %}

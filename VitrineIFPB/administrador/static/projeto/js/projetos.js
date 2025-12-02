@@ -7,7 +7,7 @@ function exibirResultados(data) {
   if (projetos.length === 0) {
     corpoTabela.innerHTML = `
       <tr>
-        <td colspan="7" style="text-align: center;">Nenhum projeto encontrado.</td>
+        <td colspan="8" style="text-align: center;">Nenhum projeto encontrado.</td>
       </tr>
     `;
     return;
@@ -27,8 +27,10 @@ function exibirResultados(data) {
           ${projeto.status === "Em Andamento" ? "em-andamento" : ""}
           ${projeto.status === "Parado" ? "parado" : ""}">${projeto.status}</span>
       </td>
+      <td data-label="Link"><a href="{{ projeto.link }}">${ projeto.link }</a></td>
       <td data-label="Observações de Tramitação">${projeto.observacoes}</td>
-      <td data-label="Ações" class="admin-actions">Editar</td>
+      <td data-label="Ações" class="admin-actions"><a href="${projeto.link_edicao}" class="botao-editar">Editar</a></td>
+
     `;
 
     corpoTabela.appendChild(linha);
